@@ -1,28 +1,118 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<title>个人中心</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav {
+            background-color: #444;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header>
-<!-- 用户头像、昵称、等级等信息 -->
-  banming
-</header>
-<nav>
-<!-- 导航菜单：个人资料、我的消息、账户设置等 -->
-</nav>
-<section>
-  正在开发......
-<!-- 个人信息展示区域 -->
-</section>
-<aside>
-<!-- 辅助信息，如广告、链接等 -->
-</aside>
-<footer>
-<!-- 页脚信息，如版权、联系方式等 -->
-  正在努力开发......
-</footer>
+    <header>
+        <h1>banming</h1>
+        <p>开发中......</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#links">相关链接</a></li>
+            <li><a href="#contact">联系我</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="about">
+            <h2>关于我</h2>
+            <p>12345</p>
+        </section>
+        <section id="links">
+            <h2>相关链接</h2>
+            <ul>
+                <li><a href="https://github.com">充电功率换算</a> - 换算充电功率。</li>
+                <li><a href="https://stackoverflow.com">无</a> - 1234567890。</li>
+            </ul>
+        </section>
+        <section id="contact">
+            <h2>联系我</h2>
+            <p>邮箱：<a href="mailto:banming_519_appleid@outlook.com">banming_519_appleid@outlook.com</a></p>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 banming. 版权所有.
+    </footer>
 </body>
+
 </html>
