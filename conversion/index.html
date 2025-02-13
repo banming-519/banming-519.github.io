@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充电功率计算</title>
+    <link rel="stylesheet" href="./css/Input.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/Placeholder.css">
+    <link rel="stylesheet" href="./css/Loading.css">
+    <link rel="stylesheet" href="./css/buttons.css">
+    <script src="./js/index.js"></script>
+</head>
+
+<body onload="isload()">
+    <!-- 加载提示区 -->
+    <div id="loading">
+        <ui-loading rows="5" size="3">正在加载中<ui-dot></ui-dot></ui-loading>
+    </div>
+    <!-- 默认隐藏 -->
+    <div id="main" style="display: none;">
+        <!-- 用户输入区 -->
+        <div>
+            <!-- 移动端弹出数字九宫格键盘 -->
+            mWh:<input type="number" class="ui-input" pattern="\d*" placeholder="请输入mWh（毫瓦时）" id="mWh">
+            <br>
+            时间:<input type="number" class="ui-input" min="0" pattern="\d*" placeholder="时" onchange="if(this.value<0)value='0'" id="H">:
+            <input type="number" class="ui-input" min="0" max="59" pattern="\d*" placeholder="分" onchange="if(this.value>59)value='59';if(this.value<0)value='0'" id="M">
+            <!-- 按钮容器 -->
+            <div class="button-container">
+                <button onclick="document.getElementById('output').innerHTML = convert() + 'W';" class="button-con">
+                    转换
+                    <svg fill="currentColor" viewBox="0 0 24 24" class="icon-con">
+                        <path clip-rule="evenodd"
+                              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+
+                <button onclick="resetInput();document.getElementById('output').innerHTML='--'" class="button-rst">
+                    <svg class="svg-icon-rst" fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <g stroke="#ff342b" stroke-linecap="round" stroke-width="1.5">
+                            <path d="m3.33337 10.8333c0 3.6819 2.98477 6.6667 6.66663 6.6667 3.682 0 6.6667-2.9848 6.6667-6.6667 0-3.68188-2.9847-6.66664-6.6667-6.66664-1.29938 0-2.51191.37174-3.5371 1.01468"></path>
+                            <path d="m7.69867 1.58163-1.44987 3.28435c-.18587.42104.00478.91303.42582 1.0989l3.28438 1.44986"></path>
+                        </g>
+                    </svg>
+                    <span class="lable-rst">重置</span>
+                </button>
+            </div>
+        </div>
+        <!-- 结果区 -->
+        <div>
+            <p id="output">--</p>
+        </div>
+    </div>
+
+    <!-- 禁止12代码 -->
+    <script>
+        function fuckyou() {
+            window.close(); //关闭当前窗口(防抽)
+            // window.location="./FuckYou.html"; //将当前窗口跳转
+            window.location = ""
+        }
+
+        function ck() {
+            console.profile();
+            console.profileEnd();
+            //我们判断一下profiles里面有没有东西，如果有，肯定有人按F12了，没错！！
+            if (console.clear) {
+                console.clear()
+            };
+            if (typeof console.profiles == "object") {
+                return console.profiles.length > 0;
+            }
+        }
+
+        function hehe() {
+            if ((window.console && (console.firebug || console.table && /firebug/i.test(console.table()))) || (typeof opera == 'object' && typeof opera.postError == 'function' && console.profile.length > 0)) {
+                fuckyou();
+            }
+            if (typeof console.profiles == "object" && console.profiles.length > 0) {
+                fuckyou();
+            }
+        }
+
+        hehe();
+        window.onresize = function () {
+            if ((window.outerHeight - window.innerHeight) > 200)
+                //判断当前窗口内页高度和窗口高度，如果差值大于200，那么呵呵
+                fuckyou();
+        }
+    </script>
+</body>
+
+</html>
