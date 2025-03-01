@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的博客</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>页面正在开发中</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            font-size: 24px;
+            color: #666;
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <h1>欢迎来到我的博客</h1>
-        <nav>
-            <a href="admin.html">管理员登录</a>
-        </nav>
-    </header>
+    <h1>对不起，正在开发</h1>
+    <div id="countdown">正在计算时间...</div>
 
-    <main>
-        <section id="posts">
-            <h2>不可用  上次更新时间：25年3月1日</h2>
-            <div id="post-list" class="post-grid"></div>
-        </section>
-    </main>
+    <script>
+        // 设定开始时间
+        const startTime = new Date('2025-03-01T00:00:00').getTime();
 
-    <footer>
-        <p>&copy; 2025 我的博客</p>
-    </footer>
+        // 更新倒计时的函数
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const elapsedTime = now - startTime;
 
-    <script src="script.js"></script>
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = `上一次更改正计时：${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+        }
+
+        // 初始调用更新函数
+        updateCountdown();
+
+        // 每秒更新一次倒计时
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
+
 </html>
