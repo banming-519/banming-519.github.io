@@ -1,118 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>banming</title>
+    <title>页面维护中</title>
     <style>
-        /* 全局样式 */
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
             background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        nav {
-            background-color: #444;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
+            flex-direction: column;
         }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
+        .maintenance-message {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
         }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        section {
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 600px) {
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
+        .timer {
+            font-size: 1.5em;
+            color: #666;
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>临时页面 正在维护更新</h1>
-        <p>开发中......</p>
-    </header>
-    <!--<nav>
-        <ul>
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#links">相关链接</a></li>
-            <li><a href="#contact">联系我</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="about">
-            <h2>关于我</h2>
-            <p>12345</p>
-        </section>
-        <section id="links">
-            <h2>相关链接</h2>
-            <ul>
-                <li><a href="/conversion">充电功率换算</a> - 将mAh（毫瓦时）转换为W（瓦）。</li>
-                <li><a href="/article">文章</a> - 开发中。</li>
-            </ul>
-        </section>
-        <section id="contact">
-            <h2>联系我</h2>
-            <p>邮箱：<a href="mailto:banming_519_appleid@outlook.com">banming_519_appleid@outlook.com</a></p>
-        </section>
-    </main>-->
-    <footer>
-        &copy; 2025 banming. 版权所有.
-    </footer>
-</body>
+    <div class="maintenance-message">页面正在升级中...</div>
+    <div class="timer">上一次更新时间: <span id="last-update-timer"></span></div>
 
+    <script>
+        // 设置上一次更新的时间（2025年3月4日）
+        const lastUpdateDate = new Date('2025-03-04T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const timeDiff = now - lastUpdateDate;
+
+            // 计算天数、小时、分钟和秒
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            // 显示计时器
+            document.getElementById('last-update-timer').innerText = `${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+        }
+
+        // 每秒更新一次计时器
+        setInterval(updateTimer, 1000);
+
+        // 初始化计时器
+        updateTimer();
+    </script>
+</body>
 </html>
