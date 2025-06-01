@@ -268,10 +268,11 @@
             <p class="subtitle">聚焦我们的核心团队精英，他们以专业和热情为客户提供卓越服务</p>
         </div>
         
+        
         <div class="team-wrapper">
             <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
             <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-            
+            <marquee>
             <div class="team-track">
                 <!-- 团队成员卡片 -->
                 <div class="member-card">
@@ -353,7 +354,7 @@
                 
                 <div class="member-card">
                     <div class="avatar">
-                        <img src="zlhxd。jpg" alt="砸龙换新的">
+                        <img src="zlhxd.jpg" alt="砸龙换新的">
                     </div>
                     <div class="card-content">
                         <h2>砸龙换新的</h2>
@@ -371,27 +372,14 @@
                         <p class="bio">客户关系管理专家，擅长建立长期稳定的客户合作关系</p>
                     </div>
                 </div>
-            </div>
+            </div></marquee>
         </div>
+		
     </div>
 
 
     <script>
-        // 自动滚动逻辑
-        const track = document.querySelector('.team-track');
-        let position = 0;
-        let speed = 5;
 
-        function animate() {
-            position -= speed;
-            if (position < -track.scrollWidth / 2) {
-                position = 0;
-            }
-            track.style.transform = `translateX(${position}px)`;
-            requestAnimationFrame(animate);
-        }
-
-        // 启动动画
         animate();
 
         // 动态光效
