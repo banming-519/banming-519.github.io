@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多系统软件下载</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --animation-duration: 0.3s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color var(--animation-duration);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .recommended-banner {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideInRight var(--animation-duration) ease-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recommended-banner i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .download-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--animation-duration) ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-card.recommended {
+            border: 2px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .download-card.recommended::after {
+            content: '推荐';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .os-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .windows-icon { color: #0078d7; }
+        .mac-icon { color: #999999; }
+        .ios-icon { color: #007aff; }
+        .android-icon { color: var(--secondary-color); }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all var(--animation-duration);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .download-btn:hover {
+            background-color: #3367d6;
+            transform: scale(1.05);
+        }
+        
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* 暗色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--dark-color);
+                color: var(--light-color);
+            }
+            
+            .download-card {
+                background-color: #2d2d2d;
+                color: var(--light-color);
+            }
+            
+            .subtitle, footer {
+                color: #aaa;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>软件下载中心</h1>
+            <p class="subtitle">选择适合您操作系统的版本</p>
+        </header>
+        
+        <div id="recommended-banner" class="recommended-banner" style="display: none;">
+            <i class="fas fa-star"></i>
+            <span>检测到您使用的是 <span id="detected-os"></span>，我们为您推荐了最适合的版本</span>
+        </div>
+        
+        <div class="download-grid">
+            <div class="download-card" id="windows-card">
+                <div class="os-icon windows-icon">
+                    <i class="fab fa-windows"></i>
+                </div>
+                <h3>Windows 版本</h3>
+                <a href="Files/windows.zip" class="download-btn" download>
+                    <i class="fas fa-download"></i> 下载
+                </a>
+            </div>
+            
+            <div class="download-card" id="mac-card">
+                <div class="os-icon mac-icon">
+                    <i class="fab fa-apple"></i>
+                </div>
+                <h3>macOS 版本</h3>
+                <a href="Files/mac.dmg" class="download-btn" download>
+                    <i class="fas fa-download"></i> 下载
+                </a>
+            </div>
+            
+            <div class="download-card" id="ios-card">
+                <div class="os-icon ios-icon">
+                    <i class="fab fa-app-store-ios"></i>
+                </div>
+                <h3>iOS 版本</h3>
+				<p>不限系统版本，无需电脑，无需越狱，最新更新可直接安装。</p>
+                <a href="https://www.pgyer.com/lucky798" class="download-btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> 免越狱或巨魔安装
+                </a>
+            </div>
+            
+            <div class="download-card" id="android-card">
+                <div class="os-icon android-icon">
+                    <i class="fab fa-android"></i>
+                </div>
+                <h3>Android 版本</h3>
+                <a href="Files/android.apk" class="download-btn" download>
+                    <i class="fas fa-download"></i> 下载
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Copyright &copy; 2025 All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检测用户操作系统
+            const userAgent = navigator.userAgent;
+            let os = '未知系统';
+            let recommendedCard = null;
+            const banner = document.getElementById('recommended-banner');
+            const detectedOsSpan = document.getElementById('detected-os');
+            
+            // 检测操作系统
+            if (userAgent.indexOf('Windows') !== -1) {
+                os = 'Windows';
+                recommendedCard = document.getElementById('windows-card');
+            } else if (userAgent.indexOf('Mac') !== -1) {
+                // 区分 macOS 和 iOS
+                if (userAgent.indexOf('iPhone') !== -1 || userAgent.indexOf('iPad') !== -1 || userAgent.indexOf('iPod') !== -1) {
+                    os = 'iOS';
+                    recommendedCard = document.getElementById('ios-card');
+                } else {
+                    os = 'macOS';
+                    recommendedCard = document.getElementById('mac-card');
+                }
+            } else if (userAgent.indexOf('Android') !== -1) {
+                os = 'Android';
+                recommendedCard = document.getElementById('android-card');
+            }
+            
+            // 显示推荐
+            if (recommendedCard) {
+                detectedOsSpan.textContent = os;
+                banner.style.display = 'flex';
+                recommendedCard.classList.add('recommended');
+                
+                // 滚动到推荐卡片位置
+                setTimeout(() => {
+                    recommendedCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 500);
+            }
+            
+            // 卡片悬停动画增强
+            const cards = document.querySelectorAll('.download-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('recommended')) {
+                        this.style.transform = 'translateY(-5px)';
+                        this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('recommended')) {
+                        this.style.transform = '';
+                        this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                    }
+                });
+            });
+            
+            // 点击动画
+            const buttons = document.querySelectorAll('.download-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // 防止链接立即跳转，让动画完成
+                    if (!e.target.href.includes('example.com') && !e.target.href.includes('apps.apple.com')) {
+                        e.preventDefault();
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            window.location.href = this.href;
+                        }, 200);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
