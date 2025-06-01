@@ -495,9 +495,9 @@
             
             // 计算卡片宽度（包括gap）
             function getCardWidth() {
-                const card = cards[0];
-                if (!card) return 0;
+                if (cards.length === 0) return 0;
                 
+                const card = cards[0];
                 const cardStyle = getComputedStyle(card);
                 const trackStyle = getComputedStyle(track);
                 
@@ -518,7 +518,8 @@
             }
             
             // 上一张
-            prevBtn.addEventListener('click', () => {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 防止事件冒泡
                 if (currentIndex > 0) {
                     scrollToCard(currentIndex - 1);
                 } else {
@@ -528,7 +529,8 @@
             });
             
             // 下一张
-            nextBtn.addEventListener('click', () => {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 防止事件冒泡
                 if (currentIndex < cards.length - 1) {
                     scrollToCard(currentIndex + 1);
                 } else {
@@ -570,43 +572,15 @@
                 autoScroll();
             });
             
-            // 添加滚轮控制
-            let isScrolling = false;
-            
-            container.addEventListener('wheel', (e) => {
-                if (!isScrolling) {
-                    isScrolling = true;
-                    
-                    if (e.deltaY > 0) {
-                        // 向下滚动 - 下一张
-                        nextBtn.click();
-                    } else {
-                        // 向上滚动 - 上一张
-                        prevBtn.click();
-                    }
-                    
-                    // 防止连续滚动
-                    setTimeout(() => {
-                        isScrolling = false;
-                    }, 500);
-                }
-                
-                e.preventDefault();
-            }, { passive: false });
-            
             // 触摸滑动支持
             let touchStartX = 0;
-            let touchEndX = 0;
             
             container.addEventListener('touchstart', (e) => {
                 touchStartX = e.touches[0].clientX;
             }, { passive: true });
             
-            container.addEventListener('touchmove', (e) => {
-                touchEndX = e.touches[0].clientX;
-            }, { passive: true });
-            
-            container.addEventListener('touchend', () => {
+            container.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
                 const diff = touchStartX - touchEndX;
                 
                 if (diff > 50) {
@@ -627,7 +601,9 @@
                 document.body.appendChild(glow);
                 
                 setTimeout(() => {
-                    glow.remove();
+                    if (glow.parentNode) {
+                        glow.parentNode.removeChild(glow);
+                    }
                 }, 1000);
             });
             
@@ -638,6 +614,14 @@
             
             // 初始滚动位置
             scrollToCard(0);
+            
+            // 防止点击卡片导致页面滚动
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
         });
     </script>
 </body>
