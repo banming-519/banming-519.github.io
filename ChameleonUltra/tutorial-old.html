@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统教程</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .device-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .device-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .loading {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .loading-circle {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #4facfe;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-circle:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-circle:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { 
+                transform: scale(0);
+            } 40% { 
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .device-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeIn">
+        <h1 id="title">检测您的设备...</h1>
+        <div class="device-icon">
+            <img id="device-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDE2VjhhMiAyIDAgMCAwLTItMkg0YTIgMiAwIDAgMC0yIDJ2OGEyIDIgMCAwIDAgMiAyaDE2YTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PHBhdGggZD0iTTE2IDEyLjVhLjUuNSAwIDAgMS0uNS0uNXYtM2EuNS41IDAgMCAxIC41LS41aDMuNWEuNS41IDAgMCAxIC41LjV2M2EuNS41IDAgMCAxLS41LjVoLTMuNXoiPjwvcGF0aD48L3N2Zz4=" alt="设备图标">
+        </div>
+        <p id="description" class="animate__animated animate__fadeIn">正在识别您的操作系统...</p>
+        <a id="tutorial-btn" class="btn animate__animated animate__fadeInUp" href="other.html">打开非iOS教程</a>
+		<a id="tutorial-btn" class="btn animate__animated animate__fadeInUp" href="iOS.html">打开iOS端教程</a>
+        <div class="loading" id="loading">
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检测用户操作系统
+            function detectOS() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                
+                // iOS检测
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    return 'iOS';
+                }
+                
+                // 其他系统
+                return 'other';
+            }
+            
+            // 创建波纹效果
+            function createRipple(event) {
+                const btn = event.currentTarget;
+                const circle = document.createElement("span");
+                const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+                const radius = diameter / 2;
+                
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`;
+                circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`;
+                circle.classList.add("ripple");
+                
+                const ripple = btn.getElementsByClassName("ripple")[0];
+                if (ripple) {
+                    ripple.remove();
+                }
+                
+                btn.appendChild(circle);
+            }
+            
+            // 显示对应系统的内容
+            function showContent(os) {
+                const title = document.getElementById('title');
+                const deviceImage = document.getElementById('device-image');
+                const description = document.getElementById('description');
+                const tutorialBtn = document.getElementById('tutorial-btn');
+                const loading = document.getElementById('loading');
+                
+                // 隐藏加载动画
+                loading.style.display = 'none';
+                
+                if (os === 'iOS') {
+                    title.textContent = 'iOS端设备刷固件教程';
+                    deviceImage.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDE5LjVhNy41IDcuNSAwIDAgMS03LjUtNy41QzQuNSAxMSAxMSA0LjUgMTIgNC41czcuNSA2LjUgNy41IDcuNWE3LjUgNy41IDAgMCAxLTcuNSA3LjV6Ij48L3BhdGg+PHBhdGggZD0iTTEyIDE1LjVhMy41IDMuNSAwIDEgMCAwLTcgMy41IDMuNSAwIDAgMCAwIDd6Ij48L3BhdGg+PC9zdmc+';
+                    description.textContent = '经检测，您的设备为iOS系统，建议查看iOS系统教程';
+                    
+                } else {
+                    title.textContent = '非iOS端刷固件设备教程';
+                    deviceImage.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDE2VjhhMiAyIDAgMCAwLTItMkg0YTIgMiAwIDAgMC0yIDJ2OGEyIDIgMCAwIDAgMiAyaDE2YTIgMiAwIDAgMCAyLTJ6Ij48L3BhdGg+PHBhdGggZD0iTTE2IDEyLjVhLjUuNSAwIDAgMS0uNS0uNXYtM2EuNS41IDAgMCAxIC41LS41aDMuNWEuNS41IDAgMCAxIC41LjV2M2EuNS41IDAgMCAxLS41LjVoLTMuNXoiPjwvcGF0aD48L3N2Zz4=';
+                    description.textContent = '经检测，您的设备为非iOS系统，建议查看非iOS端设备教程';
+                    
+                }
+                
+                // 显示按钮并添加动画
+                tutorialBtn.style.display = 'inline-block';
+                tutorialBtn.classList.add('animate__animated', 'animate__fadeInUp');
+                
+                // 添加波纹效果
+                tutorialBtn.addEventListener('click', createRipple);
+            }
+            
+            // 模拟检测过程
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            
+            setTimeout(function() {
+                const os = detectOS();
+                showContent(os);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
