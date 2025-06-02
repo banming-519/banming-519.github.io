@@ -592,21 +592,6 @@
                 }
             }, { passive: true });
             
-            // 动态光效
-            document.addEventListener('mousemove', (e) => {
-                const glow = document.createElement('div');
-                glow.className = 'glow';
-                glow.style.left = e.pageX - 150 + 'px';
-                glow.style.top = e.pageY - 150 + 'px';
-                document.body.appendChild(glow);
-                
-                setTimeout(() => {
-                    if (glow.parentNode) {
-                        glow.parentNode.removeChild(glow);
-                    }
-                }, 1000);
-            });
-            
             // 响应式调整
             window.addEventListener('resize', () => {
                 scrollToCard(currentIndex);
