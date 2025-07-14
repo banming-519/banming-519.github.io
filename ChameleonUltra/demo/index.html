@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chameleon Ultra - 模拟操作</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/all.min.js"></script>
+    <meta name="Keywords" Content="自动,自动轮询,门禁复制,手动换卡,自动换卡,自动切换,自动,轮询,电梯,考勤,卡,IC卡,ID卡,变色龙,Ultra,ChameleonUltra,Chameleon,固件">
+    <meta name="Description" Content="变色龙轮询固件是一款非常好用的定制固件，可以实现多卡自动切换，最新还有自适应切换，摆脱手动换卡的繁琐。更有16卡槽升级，无需更换硬件，手机就可刷固件。详情请加Q群：334145434。">
+    <link rel="icon" href="assets/img/icon/fabicon.ico">
+    <!--感谢所有参与到网站制作、找问题的用户-->
+    <!--以下为参与到网站制作、找问题的用户名单-->
+    <!------------------------------------->
+    <!--             参与编辑：          -->
+    <!--            @砸龙换新的       	 -->
+    <!--             @编织@梦             -->
+    <!--              @小晨喵             -->
+    <!--          @辞.变色龙中间商       -->
+    <!------------------------------------->
+    <!--             参与检查：           -->
+    <!--            @砸龙换新的       	 -->
+    <!--             @编织@梦             -->
+    <!--            @NodYoung            -->
+    <!--               @撕夜              -->
+    <!--              @小晨喵             -->
+    <!--              @贺之然             -->
+    <!--       以及所有访问过网站的用户   -->
+    <!------------------------------------->
+    <!--         参与模拟操作编辑：       -->
+    <!--            @砸龙换新的       	 -->
+    <!--          @辞.变色龙中间商       -->
+    <!------------------------------------->
+    <!--             参与部署：            -->
+    <!--     @MR.SIX（cu.511116.xyz/）    -->
+    <!--   @编织@梦（video.majunfei.club） -->
+    <!--            @砸龙换新的            -->
+    <!--https://banming.dpdns.org/ChameleonUltra/-->
+    <!------------------------------------->
+</head>
+<body>
+    <!--感谢所有参与到网站制作、找问题的用户-->
+    <!--以下为参与到网站制作、找问题的用户名单-->
+    <!------------------------------------->
+    <!--             参与编辑：          -->
+    <!--            @砸龙换新的       	 -->
+    <!--             @编织@梦             -->
+    <!--              @小晨喵             -->
+    <!--          @辞.变色龙中间商       -->
+    <!------------------------------------->
+    <!--             参与检查：           -->
+    <!--            @砸龙换新的       	 -->
+    <!--             @编织@梦             -->
+    <!--            @NodYoung            -->
+    <!--               @撕夜              -->
+    <!--              @小晨喵             -->
+    <!--              @贺之然             -->
+    <!--       以及所有访问过网站的用户   -->
+    <!------------------------------------->
+    <!--         参与模拟操作编辑：       -->
+    <!--            @砸龙换新的       	 -->
+    <!--          @辞.变色龙中间商       -->
+    <!------------------------------------->
+    <!--             参与部署：            -->
+    <!--     @MR.SIX（cu.511116.xyz/）    -->
+    <!--   @编织@梦（video.majunfei.club） -->
+    <!--            @砸龙换新的            -->
+    <!--https://banming.dpdns.org/ChameleonUltra/-->
+    <!------------------------------------->
+    <div class="bg-grid"></div>
+
+    <!-- 左侧导航菜单 -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <span>Chameleon Ultra</span>
+            </div>
+        </div>
+
+        <div class="nav-menu">
+            <a href="#" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>首页</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-microchip"></i>
+                <span>卡槽管理</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-save"></i>
+                <span>已保存的卡</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-download"></i>
+                <span>读取卡片</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-upload"></i>
+                <span>写入卡片</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>设置</span>
+            </a>
+            <a href="#" class="nav-item debug">
+                <i class="fas fa-bug"></i>
+                <span>调试</span>
+            </a>
+        </div>
+
+        <div class="nav-footer">
+            <p>© 2025 Chameleon Ultra</p>
+            <p>v3.0-29-qc955c4f</p>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <div class="device-card">
+            <div class="status-bar">
+                <a href="#" class="home-link">
+                    <i class="fas fa-home"></i>
+                    <span>设备概览</span>
+                </a>
+                <div class="connection-status statusdisconnection connect">
+                    <div class="status-indicator-red"></div>
+                    <span>未连接(点我连接)</span>
+                </div>
+
+                <div class="connection-status statusconnected" style="display:none;">
+                    <div class="status-indicator-green"></div>
+                    <span>已连接</span>
+                </div>
+            </div>
+
+            <div class="device-status">
+
+                <div class="statusdisconnection">
+                    <div class="status-item">
+                        <span class="status-label">未连接Chameleon Ultra</span>
+                            <div class="status-value" style="text-align: center;">
+                                请连接设备<i class="fas fa-link"></i>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="statusconnected" style="display:none;">
+                    <div class="status-item">
+                        <span class="status-label">设备标识</span>
+                        <div class="status-value">
+                            D8:62:DE:56:B7:71
+                            <span class="status-error">×</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="device-name">Chameleon Ultra</div>
+
+                <div class="slot-container">
+                    <div class="slot-header">
+                        <span>卡槽状态</span>
+                        <span>已使用的卡槽: <span class="slot-count">3/16</span></span>
+                    </div>
+
+                    <div class="slots">
+                        <div class="slot">1</div>
+                        <div class="slot">2</div>
+                        <div class="slot">3</div>
+                        <div class="slot">4</div>
+                        <div class="slot">5</div>
+                        <div class="slot">6</div>
+                        <div class="slot">7</div>
+                        <div class="slot">8</div>
+                        <div class="slot">9</div>
+                        <div class="slot">10</div>
+                        <div class="slot">11</div>
+                        <div class="slot">12</div>
+                        <div class="slot">13</div>
+                        <div class="slot">14</div>
+                        <div class="slot">15</div>
+                        <div class="slot">16</div>
+                    </div>
+                </div>
+
+                <div class="device-logo">Chameleon Ultra</div>
+
+                <div class="firmware-info" style="">
+                    <span class="firmware-label">轮询固件版本:</span>
+                    <span class="firmware-version">
+                        v3.0-29-qc955c4f
+                        <button class="update-button">
+                        </button>
+                    </span>
+                </div>
+                <div>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                © 2023 Chameleon Ultra | 设备管理界面
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
