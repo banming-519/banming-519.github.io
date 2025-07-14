@@ -1,12 +1,12 @@
 {
   "ads": [
     {
-      "imageUrl": "/images/lx01.png",
+      "imageUrl": "./images/lx01.png",
       "duration": 5000,
       "linkUrl": "../"
     },
     {
-      "imageUrl": "/images/lx02.png",
+      "imageUrl": "./images/lx02.png",
       "duration": 5000,
       "linkUrl": "../QQ.html"
     }
