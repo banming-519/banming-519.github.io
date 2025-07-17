@@ -2,13 +2,18 @@
   "ads": [
     {
       "imageUrl": "./images/lx01.png",
-      "duration": 5000,
+      "duration": 3000,
       "linkUrl": "../"
     },
     {
       "imageUrl": "./images/lx02.png",
-      "duration": 5000,
+      "duration": 3000,
       "linkUrl": "../QQ.html"
+    },
+    {
+      "imageUrl": "./images/16led01.jpg",
+      "duration": 3000,
+      "linkUrl": "../16led.html"
     }
   ]
 }

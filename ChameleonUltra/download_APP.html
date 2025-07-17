@@ -280,13 +280,22 @@
             <h1>软件下载中心</h1>
             <p class="subtitle">选择适合您操作系统的版本</p>
         </header>
-        
+
         <div id="recommended-banner" class="recommended-banner" style="display: none;">
             <i class="fas fa-star"></i>
             <span>检测到您使用的是 <span id="detected-os"></span>，我们为您推荐了最适合的版本</span>
         </div>
-        
+
         <div class="download-grid">
+            <div class="download-card" id="ios-card">
+                <div class="os-icon android-icon">
+                    <img src="assets/img/icon/xcx.png" style="width: 40px" />
+                </div>
+                <h3>微信小程序 版本</h3>
+                <a href="" class="download-btn">
+                    <i class="fas fa-external-link-alt"></i> 打开
+                </a>
+            </div>
             <div class="download-card" id="windows-card">
                 <div class="os-icon windows-icon">
                     <i class="fab fa-windows"></i>
@@ -296,7 +305,7 @@
                     <i class="fas fa-download"></i> 下载
                 </a>
             </div>
-            
+
             <div class="download-card" id="mac-card">
                 <div class="os-icon mac-icon">
                     <i class="fab fa-apple"></i>
@@ -306,18 +315,9 @@
                     <i class="fas fa-download"></i> 下载
                 </a>
             </div>
-            
-            <div class="download-card" id="ios-card">
-                <div class="os-icon ios-icon">
-                    <i class="fab fa-app-store-ios"></i>
-                </div>
-                <h3>iOS 版本</h3>
-				<p>不限系统版本，无需越狱，也可<b>完全永久免费</b>安装。（点击下方按钮查看教程）</p>
-                <a href="./tutorial/iOS.html" class="download-btn" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> 免越狱或巨魔安装
-                </a>
-            </div>
-            
+
+
+
             <div class="download-card" id="android-card">
                 <div class="os-icon android-icon">
                     <i class="fab fa-android"></i>
@@ -327,22 +327,34 @@
                     <i class="fas fa-download"></i> 下载
                 </a>
             </div>
+            
+            <div class="download-card" id="ios-app-card">
+                <div class="os-icon ios-icon">
+                    <i class="fab fa-app-store-ios"></i>
+                </div>
+                <h3>iOS 版本</h3>
+                <p>不限系统版本，无需越狱，也可<b>完全永久免费</b>安装。（点击下方按钮查看教程）</p>
+                <a href="./tutorial/iOS.html" class="download-btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> 免越狱或巨魔安装
+                </a>
+            </div>
+
         </div>
-        
+
         <footer>
             <p>Copyright &copy; 2025 All rights reserved.</p>
         </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 检测用户操作系统
             const userAgent = navigator.userAgent;
             let os = '未知系统';
             let recommendedCard = null;
             const banner = document.getElementById('recommended-banner');
             const detectedOsSpan = document.getElementById('detected-os');
-            
+
             // 检测操作系统
             if (userAgent.indexOf('Windows') !== -1) {
                 os = 'Windows';
@@ -360,13 +372,13 @@
                 os = 'Android';
                 recommendedCard = document.getElementById('android-card');
             }
-            
+
             // 显示推荐
             if (recommendedCard) {
                 detectedOsSpan.textContent = os;
                 banner.style.display = 'flex';
                 recommendedCard.classList.add('recommended');
-                
+
                 // 滚动到推荐卡片位置
                 setTimeout(() => {
                     recommendedCard.scrollIntoView({
@@ -375,29 +387,29 @@
                     });
                 }, 500);
             }
-            
+
             // 卡片悬停动画增强
             const cards = document.querySelectorAll('.download-card');
             cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
+                card.addEventListener('mouseenter', function () {
                     if (!this.classList.contains('recommended')) {
                         this.style.transform = 'translateY(-5px)';
                         this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
                     }
                 });
-                
-                card.addEventListener('mouseleave', function() {
+
+                card.addEventListener('mouseleave', function () {
                     if (!this.classList.contains('recommended')) {
                         this.style.transform = '';
                         this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
                     }
                 });
             });
-            
+
             // 点击动画
             const buttons = document.querySelectorAll('.download-btn');
             buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
+                button.addEventListener('click', function (e) {
                     // 防止链接立即跳转，让动画完成
                     if (!e.target.href.includes('example.com') && !e.target.href.includes('apps.apple.com')) {
                         e.preventDefault();

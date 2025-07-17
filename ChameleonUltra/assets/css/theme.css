@@ -574,7 +574,7 @@ img.meeting_right_event {
     display: inline-block;
     animation: gradient-animation 3s infinite;
     background: linear-gradient(45deg, #ff6b6b, #fbc531, #4cd137, #00a8ff, #9c88ff);
-    background-size: 400% 400%;
+    background-size: 100% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -617,3 +617,7 @@ img.meeting_right_event {
         left: 0;
         box-shadow: 0 0 50px 30px #ffffff inset;
     }
+
+* {
+    font-family: 'ChillYunmoGothicBold';
+}

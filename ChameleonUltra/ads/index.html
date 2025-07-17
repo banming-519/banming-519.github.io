@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>内嵌广告</title>
     <style>
+        /* 重置页面样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        /* 广告容器样式 */
         body {
             width: 100vw;
             height: 100vh;
-            background-color: #ffffff;
-            overflow: hidden; /* 禁止滚动条 */
+            background-color: white; /* 空白处白色填充 */
+            overflow: hidden; /* 禁止广告内部滚动条 */
         }
 
         .ad-container {
@@ -29,7 +30,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain; /* 保持图片比例，不拉伸 */
-            background-color: #ffffff; /* 空白处用白色填充 */
         }
 
         .loading {
@@ -41,44 +41,38 @@
             font-family: Arial, sans-serif;
             font-size: 14px;
         }
+        /* iframe自身固定定位样式（通过父页面传入的style生效） */
     </style>
 </head>
 <body>
     <div class="ad-container" id="adContainer">
         <div class="loading" id="loading">加载中...</div>
-        <img src="" alt="" class="ad-image" id="adImage">
+        <img src="" alt="广告图片" class="ad-image" id="adImage" style="display: none;">
     </div>
 
     <script>
         // 广告配置
         const AD_CONFIG = {
-            jsonUrl: 'ad_config.json', // 外部JSON文件路径
+            jsonUrl: 'ad_config.json',
             currentAdIndex: 0,
             ads: []
         };
 
-        // 获取DOM元素
+        // DOM元素
         const adContainer = document.getElementById('adContainer');
         const adImage = document.getElementById('adImage');
         const loading = document.getElementById('loading');
 
-        // 从外部JSON加载广告数据
+        // 加载广告配置
         async function loadAdConfig() {
             try {
                 const response = await fetch(AD_CONFIG.jsonUrl);
-                if (!response.ok) {
-                    throw new Error('无法加载广告配置');
-                }
+                if (!response.ok) throw new Error('配置加载失败');
                 const data = await response.json();
                 AD_CONFIG.ads = data.ads || [];
-
-                if (AD_CONFIG.ads.length === 0) {
-                    loading.textContent = '没有广告数据';
-                    return false;
-                }
-                return true;
+                return AD_CONFIG.ads.length > 0;
             } catch (error) {
-                console.error('加载广告配置失败:', error);
+                console.error('加载失败:', error);
                 loading.textContent = '加载失败';
                 return false;
             }
@@ -89,29 +83,25 @@
             if (AD_CONFIG.ads.length === 0) return;
 
             const currentAd = AD_CONFIG.ads[AD_CONFIG.currentAdIndex];
-
-            // 隐藏加载提示，显示图片
             loading.style.display = 'none';
             adImage.style.display = 'block';
-
-            // 设置图片源
             adImage.src = currentAd.imageUrl;
 
             // 图片加载失败处理
-            adImage.onerror = function() {
+            adImage.onerror = () => {
                 loading.textContent = '图片加载失败';
                 loading.style.display = 'block';
                 adImage.style.display = 'none';
             };
 
-            // 设置点击跳转链接
-            adContainer.onclick = function() {
+            // 点击跳转
+            adContainer.onclick = () => {
                 if (currentAd.linkUrl) {
                     window.open(currentAd.linkUrl, '_blank');
                 }
             };
 
-            // 设置下一个广告的显示时间
+            // 定时切换广告
             setTimeout(nextAd, currentAd.duration || 5000);
         }
 
@@ -121,21 +111,12 @@
             showCurrentAd();
         }
 
-        // 初始化广告
-        async function initAd() {
-            const configLoaded = await loadAdConfig();
-            if (configLoaded) {
-                showCurrentAd();
-            }
+        // 初始化
+        async function init() {
+            const loaded = await loadAdConfig();
+            if (loaded) showCurrentAd();
         }
-
-        // 窗口大小变化时，确保广告适应
-        window.addEventListener('resize', function() {
-            // 自动适应大小，无需额外处理，CSS已设置
-        });
-
-        // 启动广告
-        initAd();
+        init();
     </script>
 </body>
 </html>
