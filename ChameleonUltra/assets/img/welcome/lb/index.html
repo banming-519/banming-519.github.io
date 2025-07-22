@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .carousel-item {
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .carousel-indicator {
+                transition: all 0.3s ease;
+            }
+
+                .carousel-indicator.active {
+                    width: 2rem;
+                    background-color: theme('colors.primary');
+                }
+        }
+    </style>
+    <style>
+        body {
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: transparent;
+        }
+        /* 隐藏滚动条 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-transparent">
+    <div class="container mx-auto px-4 py-8">
+        <div class="relative h-[60vh] md:h-[70vh] bg-transparent overflow-hidden rounded-xl">
+            <!-- 轮播图片 -->
+            <div class="carousel-container flex h-full transition-transform duration-500 ease-in-out" id="carouselContainer">
+                <div class="carousel-item min-w-full h-full flex items-center justify-center">
+                    <img src="1.png" alt="" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">
+                </div>
+                <div class="carousel-item min-w-full h-full flex items-center justify-center">
+                    <img src="2.png" alt="" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">
+                </div>
+                <div class="carousel-item min-w-full h-full flex items-center justify-center">
+                    <img src="3.png" alt="" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">
+                </div>
+                <div class="carousel-item min-w-full h-full flex items-center justify-center">
+                    <img src="4.png" alt="" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">
+                </div>
+            </div>
+
+            <!-- 轮播指示器 -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                <button class="carousel-indicator w-3 h-1.5 rounded-full bg-gray-300 active" data-index="0"></button>
+                <button class="carousel-indicator w-3 h-1.5 rounded-full bg-gray-300" data-index="1"></button>
+                <button class="carousel-indicator w-3 h-1.5 rounded-full bg-gray-300" data-index="2"></button>
+                <button class="carousel-indicator w-3 h-1.5 rounded-full bg-gray-300" data-index="3"></button>
+            </div>
+
+            <!-- 轮播控制按钮 -->
+            <button class="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-primary transition-all z-10" id="prevBtn">
+                <i class="fa fa-angle-left text-xl"></i>
+            </button>
+            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-primary transition-all z-10" id="nextBtn">
+                <i class="fa fa-angle-right text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carouselContainer = document.getElementById('carouselContainer');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
+            let intervalId;
+
+            // 设置自动轮播
+            function startCarousel() {
+                intervalId = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % carouselItems.length;
+                    updateCarousel();
+                }, 3000); // 3秒切换一次
+            }
+
+            // 更新轮播状态
+            function updateCarousel() {
+                // 移动轮播图片
+                carouselContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // 更新指示器状态
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+
+            // 点击指示器切换图片
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = parseInt(indicator.dataset.index);
+                    updateCarousel();
+                    resetInterval();
+                });
+            });
+
+            // 上一张按钮
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+                resetInterval();
+            });
+
+            // 下一张按钮
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+                resetInterval();
+            });
+
+            // 重置自动轮播计时器
+            function resetInterval() {
+                clearInterval(intervalId);
+                startCarousel();
+            }
+
+            // 鼠标悬停暂停轮播
+            carouselContainer.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+
+            // 鼠标离开继续轮播
+            carouselContainer.addEventListener('mouseleave', () => {
+                startCarousel();
+            });
+
+            // 初始化轮播
+            startCarousel();
+        });
+    </script>
+</body>
+</html>
