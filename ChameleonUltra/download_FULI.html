@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>账户验证</title>
+    <title>激活码验证</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
+    <link href="./assets/css/plugins/fontawesome.css" rel="stylesheet">
+    <script>tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -15,7 +14,6 @@
                         secondary: '#69b1ff',
                         accent: '#36D399',
                         danger: '#F87272',
-                        warning: '#FBBD23',
                         dark: '#1E293B',
                         light: '#F8FAFC'
                     },
@@ -24,8 +22,7 @@
                     },
                 }
             }
-        }
-    </script>
+        }</script>
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto {
@@ -51,139 +48,24 @@
             .card-shadow {
                 box-shadow: 0 10px 25px -5px rgba(22, 93, 255, 0.1), 0 8px 10px -6px rgba(22, 93, 255, 0.1);
             }
-
-            .pulse-animation {
-                animation: pulse 2s infinite;
-            }
-
-            @keyframes pulse {
-                0% {
-                    opacity: 0.6;
-                }
-
-                50% {
-                    opacity: 1;
-                }
-
-                100% {
-                    opacity: 0.6;
-                }
-            }
         }
     </style>
 </head>
 <body class="font-inter bg-gray-50 min-h-screen flex items-center justify-center p-4">
-    <script>
-        // 立即执行函数包裹全局逻辑
-        (function() {
-            // 检查URL中是否有token参数
-            const urlParams = new URLSearchParams(window.location.search);
-            const token = urlParams.get('token');
+    <!-- 背景装饰元素 -->
+    <div class="fixed inset-0 overflow-hidden -z-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-secondary/5"></div>
+        <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-secondary/10 blur-3xl"></div>
+    </div>
 
-            // 如果有token参数，直接调用API验证
-            if (token) {
-                // 创建结果显示容器
-                const resultContainer = document.createElement('div');
-                resultContainer.id = 'result-container';
-                resultContainer.className = 'fixed inset-0 flex items-center justify-center bg-white z-50 p-4';
-                document.body.appendChild(resultContainer);
-
-                // 创建加载指示器
-                const loadingIndicator = document.createElement('div');
-                loadingIndicator.className = 'text-center';
-                loadingIndicator.innerHTML = `
-                    <div class="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-                    <p class="text-gray-600">正在验证令牌...</p>
-                `;
-                resultContainer.appendChild(loadingIndicator);
-
-                // 调用API验证Token
-                fetch(`/api/fuli/yanzheng/?token=${encodeURIComponent(token)}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP错误 ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(result => {
-                        // 如果验证成功，执行对应操作
-                        if (result.success && result.action) {
-                            executeAction(result.action);
-                        }
-                        displayResult(result);
-                    })
-                    .catch(error => {
-                        const errorResult = {
-                            success: false,
-                            timestamp: new Date().toISOString(),
-                            token: token,
-                            message: `验证失败: ${error.message}`,
-                            data: {}
-                        };
-                        displayResult(errorResult);
-                    });
-
-                // 执行对应操作
-                function executeAction(action) {
-                    try {
-                        switch(action) {
-                            case 'clear_login':
-                                // 清除登录状态
-                                localStorage.removeItem('user_token');
-                                localStorage.removeItem('user_data');
-                                break;
-
-                            case 'activate':
-                                // 激活成功
-                                localStorage.setItem('activationStatus', 'active');
-                                const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-                                const expirationDate = new Date(Date.now() + thirtyDays);
-                                localStorage.setItem('activationExpiry', expirationDate.toISOString());
-                                break;
-
-                            case 'lock':
-                                // 锁定账户
-                                localStorage.setItem('account_locked', 'true');
-                                break;
-                        }
-                    } catch (error) {
-                        console.error('执行操作失败:', error);
-                    }
-                }
-
-                // 显示结果
-                function displayResult(result) {
-                    resultContainer.innerHTML = `
-                        <div class="max-w-md w-full mx-auto bg-white rounded-lg shadow-lg p-6">
-                            <div class="text-center mb-4">
-                                <div class="text-5xl mx-auto ${result.success ? 'text-accent' : result.action === 'lock' ? 'text-warning' : 'text-danger'}">
-                                    ${result.success ? '<i class="fa fa-check-circle"></i>' : result.action === 'lock' ? '<i class="fa fa-lock"></i>' : '<i class="fa fa-exclamation-circle"></i>'}
-                                </div>
-                                <h2 class="text-xl font-bold mt-4">${result.success ? '操作成功' : result.action === 'lock' ? '账户锁定' : '验证失败'}</h2>
-                            </div>
-                            <pre class="text-sm font-mono bg-gray-100 p-4 rounded overflow-x-auto mt-4">${JSON.stringify(result, null, 2)}</pre>
-                            <button id="close-result" class="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded transition-all duration-300">
-                                关闭
-                            </button>
-                        </div>
-                    `;
-
-                    // 添加关闭按钮事件
-                    document.getElementById('close-result').addEventListener('click', function() {
-                        resultContainer.remove();
-                    });
-                }
-            }
-        })();
-    </script>
-
-    <!-- 原始激活码验证页面内容 (当没有token参数时显示) -->
-    <div id="activation-container" class="max-w-md w-full mx-auto relative z-10">
+    <!-- 主卡片 -->
+    <div class="max-w-md w-full mx-auto relative z-10">
         <div class="bg-white rounded-2xl card-shadow overflow-hidden transform transition-all duration-500 hover:shadow-xl">
             <!-- 头部区域 -->
             <div class="bg-gradient-primary p-8 text-white relative overflow-hidden">
                 <div class="absolute inset-0 opacity-20">
-                    <i class="fa fa-key text-[200px] absolute -right-20 -bottom-20 transform rotate-12"></i>
+                    <i class="fa fa-key text-[180px] absolute -right-20 -bottom-21 transform rotate-12"></i>
                 </div>
                 <div class="relative z-10">
                     <h1 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-shadow mb-2">激活您的账户</h1>
@@ -234,7 +116,7 @@
                         <i class="fa fa-exclamation-circle text-xl mr-3"></i>
                         <div>
                             <h3 class="font-medium">验证失败</h3>
-                            <p id="errorText">激活码格式不正确，请输入12位包含数字和字母的激活码</p>
+                            <p id="errorText">激活码无效，请输入有效激活码</p>
                         </div>
                     </div>
                 </div>
@@ -263,22 +145,13 @@
                 <i class="fa fa-check-circle text-2xl mr-3"></i>
                 <div>
                     <h3 class="font-medium">验证成功！</h3>
-                    <p>正在跳转至会员中心...</p>
+                    <p>正在跳转...</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 如果URL中有token参数，隐藏激活码表单
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('token')) {
-                document.getElementById('activation-container').style.display = 'none';
-                return;
-            }
-
-            // 执行原始的激活码验证逻辑
+    <script>document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('activationForm');
             const activationCodeInput = document.getElementById('activationCode');
             const submitBtn = document.getElementById('submitBtn');
@@ -415,7 +288,7 @@
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<span>验证激活码</span><i class="fa fa-arrow-right"></i>';
 
-                        showError('激活码格式不正确，请输入12位包含数字和字母的激活码');
+                        showError('激活码无效，请输入有效的激活码');
                         incrementAttempts();
                         return;
                     }
@@ -439,7 +312,7 @@
 
                     // 模拟跳转
                     setTimeout(function() {
-                        window.location.href = 'https://example.com/dashboard'; // 替换为实际跳转URL
+                        window.location.href = './download_FULI_m.html'; // 替换为实际跳转URL
                     }, 2000);
                 }, 1500);
             });
@@ -453,7 +326,8 @@
                     const expiryDate = new Date(expiry);
                     if (expiryDate > new Date()) {
                         // 已激活且未过期，直接跳转
-                        window.location.href = 'https://example.com/dashboard'; // 替换为实际跳转URL
+                        alert("您已于"+expiryDate+"验证激活码通过，状态未过期，点击确定跳转");
+                        window.location.href = './download_FULI_m.html'; // 替换为实际跳转URL
                     } else {
                         // 已过期，清除状态
                         localStorage.removeItem('activationStatus');
@@ -465,7 +339,6 @@
             // 页面加载时检查激活状态和锁定状态
             checkActivationStatus();
             checkLockout();
-        });
-    </script>
+        });</script>
 </body>
-</html>
+</html>    
