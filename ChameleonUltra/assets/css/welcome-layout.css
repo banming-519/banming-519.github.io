@@ -1,0 +1,421 @@
+/*
+=====================================
+Welcome Area Layout CSS
+=====================================
+Author: Kiro AI Assistant
+Description: 专门用于welcome区域的响应式布局
+功能: 480px以上左右布局，480px以下上下布局
+=====================================
+*/
+
+/* 强制覆盖外部CSS文件的冲突规则 */
+.welcome_wap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    min-height: 500px !important;
+    padding: 20px 20px !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+    gap: 15px !important;
+}
+
+/* 强制覆盖responsive.css中的display: block规则 */
+@media only screen and (max-width: 991px) {
+    .welcome_wap {
+        display: flex !important;
+    }
+}
+
+/* 默认样式 - 左右布局 */
+.welcome-text {
+    flex: 0 0 60% !important;
+    max-width: 60% !important;
+    box-sizing: border-box !important;
+    padding: 20px 0 20px 20px !important;
+    text-align: left !important;
+    width: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+}
+
+.welcome-carousel {
+    flex: 0 0 40% !important;
+    max-width: 40% !important;
+    box-sizing: border-box !important;
+    padding: 20px 20px 20px 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.welcome-carousel iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 380px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    margin-left: auto !important; /* 确保iframe靠右 */
+}
+
+/* 隐藏轮播的左右按钮 - 完全透明方案 */
+.welcome-carousel {
+    position: relative !important;
+}
+
+/* 确保iframe保持完全透明 */
+.welcome-carousel iframe {
+    background: transparent !important;
+    /* 尝试通过CSS变量隐藏按钮 */
+    --carousel-nav-display: none !important;
+}
+
+/* 使用透明的点击拦截层来阻止按钮交互，但不影响视觉 */
+.welcome-carousel::before,
+.welcome-carousel::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 60px !important;
+    background: transparent !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    cursor: default !important;
+}
+
+.welcome-carousel::before {
+    left: 0 !important;
+}
+
+.welcome-carousel::after {
+    right: 0 !important;
+}
+
+/* 480px以上统一使用左右布局 - 覆盖所有外部CSS */
+@media (min-width: 481px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        text-align: left !important;
+        padding: 20px 25px !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+    }
+
+    .welcome-text {
+        flex: 0 0 60% !important;
+        max-width: 60% !important;
+        box-sizing: border-box !important;
+        padding: 20px 0 20px 20px !important;
+        text-align: left !important;
+        width: auto !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .welcome-carousel {
+        flex: 0 0 40% !important;
+        max-width: 40% !important;
+        box-sizing: border-box !important;
+        padding: 20px 20px 20px 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+
+    .welcome-carousel iframe {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 330px !important;
+        border: none !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        margin-left: auto !important; /* 确保iframe靠右 */
+    }
+}
+
+/* 小屏幕左右布局优化 (481px-768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 15px 10px !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        gap: 5px !important;
+    }
+
+    .welcome-text {
+        flex: 0 0 58% !important;
+        max-width: 58% !important;
+        padding: 10px 0 10px 15px !important;
+        text-align: left !important;
+        width: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .welcome-carousel {
+        flex: 0 0 42% !important;
+        max-width: 42% !important;
+        padding: 10px 15px 10px 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        width: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .welcome-carousel iframe {
+        height: 280px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important; /* 确保iframe靠右 */
+    }
+
+
+}
+
+/* 中等屏幕左右布局优化 (769px-1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px 15px !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        gap: 10px !important;
+    }
+
+    .welcome-text {
+        flex: 0 0 62% !important;
+        max-width: 62% !important;
+        padding: 15px 0 15px 20px !important;
+        text-align: left !important;
+        width: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .welcome-carousel {
+        flex: 0 0 38% !important;
+        max-width: 38% !important;
+        padding: 15px 20px 15px 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+
+    .welcome-carousel iframe {
+        height: 340px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important; /* 确保iframe靠右 */
+    }
+
+    .welcome-carousel::before,
+    .welcome-carousel::after {
+        width: 50px !important;
+    }
+}
+
+/* 大屏幕左右布局优化 (1024px-1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px 20px !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        gap: 15px !important;
+    }
+
+    .welcome-text {
+        flex: 0 0 64% !important;
+        max-width: 64% !important;
+        padding: 20px 0 20px 25px !important;
+        text-align: left !important;
+        width: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .welcome-carousel {
+        flex: 0 0 36% !important;
+        max-width: 36% !important;
+        padding: 20px 25px 20px 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+
+    .welcome-carousel iframe {
+        height: 380px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important; /* 确保iframe靠右 */
+    }
+
+    .welcome-carousel::before,
+    .welcome-carousel::after {
+        width: 55px !important;
+    }
+}
+
+/* 超大屏幕左右布局优化 (≥1200px) */
+@media (min-width: 1200px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 20px 30px !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        gap: 20px !important;
+    }
+
+    .welcome-text {
+        flex: 0 0 65% !important;
+        max-width: 65% !important;
+        padding: 20px 0 20px 30px !important;
+        text-align: left !important;
+        width: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .welcome-carousel {
+        flex: 0 0 35% !important;
+        max-width: 35% !important;
+        padding: 20px 30px 20px 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+
+    .welcome-carousel iframe {
+        height: 420px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important; /* 确保iframe靠右 */
+    }
+
+    .welcome-carousel::before,
+    .welcome-carousel::after {
+        width: 60px !important;
+    }
+}
+
+/* 480px以下统一使用上下布局 */
+@media (max-width: 480px) {
+    .welcome_wap {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 15px 10px !important;
+        text-align: center !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .welcome-text {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 15px 10px !important;
+        text-align: center !important;
+        order: 1;
+        margin-bottom: 20px;
+        width: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .welcome-carousel {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 15px 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        order: 2;
+        width: auto !important;
+        margin: 0 auto !important;
+    }
+
+    .welcome-carousel iframe {
+        width: 100% !important;
+        max-width: 95% !important;
+        height: 250px !important;
+        border: none !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .welcome-carousel::before,
+    .welcome-carousel::after {
+        width: 45px !important;
+    }
+}

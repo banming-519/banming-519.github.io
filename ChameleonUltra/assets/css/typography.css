@@ -17,6 +17,8 @@
 /*--------------------------
     1. TEXT TYPOGRAPHY CSS
 -----------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700,800&display=swap');
+
 .alignleft {
     float: left;
     margin-right: 20px;

@@ -1,0 +1,471 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>账户验证</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#69b1ff',
+                        accent: '#36D399',
+                        danger: '#F87272',
+                        warning: '#FBBD23',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #69b1ff 100%);
+            }
+
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+
+            .input-focus-ring {
+                @apply focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:outline-none;
+            }
+
+            .card-shadow {
+                box-shadow: 0 10px 25px -5px rgba(22, 93, 255, 0.1), 0 8px 10px -6px rgba(22, 93, 255, 0.1);
+            }
+
+            .pulse-animation {
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    opacity: 0.6;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0.6;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <script>
+        // 立即执行函数包裹全局逻辑
+        (function() {
+            // 检查URL中是否有token参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+
+            // 如果有token参数，直接调用API验证
+            if (token) {
+                // 创建结果显示容器
+                const resultContainer = document.createElement('div');
+                resultContainer.id = 'result-container';
+                resultContainer.className = 'fixed inset-0 flex items-center justify-center bg-white z-50 p-4';
+                document.body.appendChild(resultContainer);
+
+                // 创建加载指示器
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'text-center';
+                loadingIndicator.innerHTML = `
+                    <div class="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+                    <p class="text-gray-600">正在验证令牌...</p>
+                `;
+                resultContainer.appendChild(loadingIndicator);
+
+                // 调用API验证Token
+                fetch(`/api/fuli/yanzheng/?token=${encodeURIComponent(token)}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP错误 ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        // 如果验证成功，执行对应操作
+                        if (result.success && result.action) {
+                            executeAction(result.action);
+                        }
+                        displayResult(result);
+                    })
+                    .catch(error => {
+                        const errorResult = {
+                            success: false,
+                            timestamp: new Date().toISOString(),
+                            token: token,
+                            message: `验证失败: ${error.message}`,
+                            data: {}
+                        };
+                        displayResult(errorResult);
+                    });
+
+                // 执行对应操作
+                function executeAction(action) {
+                    try {
+                        switch(action) {
+                            case 'clear_login':
+                                // 清除登录状态
+                                localStorage.removeItem('user_token');
+                                localStorage.removeItem('user_data');
+                                break;
+
+                            case 'activate':
+                                // 激活成功
+                                localStorage.setItem('activationStatus', 'active');
+                                const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+                                const expirationDate = new Date(Date.now() + thirtyDays);
+                                localStorage.setItem('activationExpiry', expirationDate.toISOString());
+                                break;
+
+                            case 'lock':
+                                // 锁定账户
+                                localStorage.setItem('account_locked', 'true');
+                                break;
+                        }
+                    } catch (error) {
+                        console.error('执行操作失败:', error);
+                    }
+                }
+
+                // 显示结果
+                function displayResult(result) {
+                    resultContainer.innerHTML = `
+                        <div class="max-w-md w-full mx-auto bg-white rounded-lg shadow-lg p-6">
+                            <div class="text-center mb-4">
+                                <div class="text-5xl mx-auto ${result.success ? 'text-accent' : result.action === 'lock' ? 'text-warning' : 'text-danger'}">
+                                    ${result.success ? '<i class="fa fa-check-circle"></i>' : result.action === 'lock' ? '<i class="fa fa-lock"></i>' : '<i class="fa fa-exclamation-circle"></i>'}
+                                </div>
+                                <h2 class="text-xl font-bold mt-4">${result.success ? '操作成功' : result.action === 'lock' ? '账户锁定' : '验证失败'}</h2>
+                            </div>
+                            <pre class="text-sm font-mono bg-gray-100 p-4 rounded overflow-x-auto mt-4">${JSON.stringify(result, null, 2)}</pre>
+                            <button id="close-result" class="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded transition-all duration-300">
+                                关闭
+                            </button>
+                        </div>
+                    `;
+
+                    // 添加关闭按钮事件
+                    document.getElementById('close-result').addEventListener('click', function() {
+                        resultContainer.remove();
+                    });
+                }
+            }
+        })();
+    </script>
+
+    <!-- 原始激活码验证页面内容 (当没有token参数时显示) -->
+    <div id="activation-container" class="max-w-md w-full mx-auto relative z-10">
+        <div class="bg-white rounded-2xl card-shadow overflow-hidden transform transition-all duration-500 hover:shadow-xl">
+            <!-- 头部区域 -->
+            <div class="bg-gradient-primary p-8 text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20">
+                    <i class="fa fa-key text-[200px] absolute -right-20 -bottom-20 transform rotate-12"></i>
+                </div>
+                <div class="relative z-10">
+                    <h1 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-shadow mb-2">激活您的账户</h1>
+                    <p class="opacity-90">请输入激活码以解锁全部功能</p>
+                </div>
+            </div>
+
+            <!-- 表单区域 -->
+            <div class="p-8 space-y-6">
+                <form id="activationForm" class="space-y-6">
+                    <!-- 激活码输入框 -->
+                    <div class="space-y-2">
+                        <label for="activationCode" class="block text-sm font-medium text-gray-700">激活码</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                <i class="fa fa-shield"></i>
+                            </span>
+                            <input type="text"
+                                   id="activationCode"
+                                   class="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 input-focus-ring transition-all-300"
+                                   placeholder="请输入激活码"
+                                   required>
+                        </div>
+                    </div>
+
+                    <!-- 记住状态选项 -->
+                    <div class="flex items-center">
+                        <input type="checkbox"
+                               id="rememberStatus"
+                               class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/50">
+                        <label for="rememberStatus" class="ml-2 text-sm text-gray-700">
+                            记住激活状态<span class="text-primary">30天</span>
+                        </label>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <button type="submit"
+                            id="submitBtn"
+                            class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center space-x-2">
+                        <span>验证激活码</span>
+                        <i class="fa fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- 错误提示 (默认隐藏) -->
+                <div id="errorMessage" class="bg-danger/10 border border-danger/30 text-danger p-4 rounded-lg hidden transform transition-all duration-300 opacity-0 translate-y-2">
+                    <div class="flex items-center">
+                        <i class="fa fa-exclamation-circle text-xl mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">验证失败</h3>
+                            <p id="errorText">激活码格式不正确，请输入12位包含数字和字母的激活码</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 锁定提示 (默认隐藏) -->
+                <div id="lockoutMessage" class="bg-gray-100 border border-gray-300 text-gray-700 p-4 rounded-lg hidden">
+                    <div class="flex items-center">
+                        <i class="fa fa-lock text-xl mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">尝试次数过多</h3>
+                            <p>您已超过最大尝试次数，请在 <span id="lockoutTimer" class="font-semibold">00:00</span> 后再试</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 帮助信息 -->
+                <div class="text-center text-sm text-gray-500 mt-6">
+                    <p>需要帮助？请联系 <a href="mailto:support@example.com" class="text-primary hover:underline">客服支持</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成功提示 (默认隐藏) -->
+        <div id="successMessage" class="mt-6 bg-accent/10 border border-accent/30 text-accent p-4 rounded-lg hidden transform transition-all duration-500 opacity-0 translate-y-4">
+            <div class="flex items-center">
+                <i class="fa fa-check-circle text-2xl mr-3"></i>
+                <div>
+                    <h3 class="font-medium">验证成功！</h3>
+                    <p>正在跳转至会员中心...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 如果URL中有token参数，隐藏激活码表单
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('token')) {
+                document.getElementById('activation-container').style.display = 'none';
+                return;
+            }
+
+            // 执行原始的激活码验证逻辑
+            const form = document.getElementById('activationForm');
+            const activationCodeInput = document.getElementById('activationCode');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const rememberStatus = document.getElementById('rememberStatus');
+            const lockoutMessage = document.getElementById('lockoutMessage');
+            const lockoutTimer = document.getElementById('lockoutTimer');
+
+            // 激活码验证正则表达式
+            const activationCodeRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{12}$/;
+            const MAX_ATTEMPTS = 3;
+            const LOCKOUT_DURATION = 15 * 60 * 1000; // 15分钟
+
+            // 检查锁定状态
+            const checkLockout = function() {
+                const lockoutTime = localStorage.getItem('activationLockout');
+                const attempts = parseInt(localStorage.getItem('activationAttempts') || '0');
+
+                if (lockoutTime && attempts >= MAX_ATTEMPTS) {
+                    const now = Date.now();
+                    const unlockTime = parseInt(lockoutTime);
+
+                    if (now < unlockTime) {
+                        // 仍处于锁定状态
+                        const remainingSeconds = Math.ceil((unlockTime - now) / 1000);
+                        updateLockoutTimer(remainingSeconds);
+                        showLockout(true);
+                        return true;
+                    } else {
+                        // 锁定时间已过，重置尝试次数
+                        resetAttempts();
+                    }
+                }
+                return false;
+            };
+
+            // 更新锁定计时器显示
+            const updateLockoutTimer = function(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                lockoutTimer.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            };
+
+            // 显示/隐藏锁定提示
+            const showLockout = function(show) {
+                if (show) {
+                    lockoutMessage.classList.remove('hidden');
+                    form.classList.add('opacity-50', 'pointer-events-none');
+                    submitBtn.disabled = true;
+                } else {
+                    lockoutMessage.classList.add('hidden');
+                    form.classList.remove('opacity-50', 'pointer-events-none');
+                    submitBtn.disabled = false;
+                }
+            };
+
+            // 增加尝试次数
+            const incrementAttempts = function() {
+                let attempts = parseInt(localStorage.getItem('activationAttempts') || '0');
+                attempts++;
+                localStorage.setItem('activationAttempts', attempts.toString());
+
+                if (attempts >= MAX_ATTEMPTS) {
+                    // 设置锁定时间
+                    const lockoutTime = Date.now() + LOCKOUT_DURATION;
+                    localStorage.setItem('activationLockout', lockoutTime.toString());
+
+                    // 启动倒计时
+                    let remainingSeconds = Math.ceil(LOCKOUT_DURATION / 1000);
+                    const countdown = setInterval(function() {
+                        remainingSeconds--;
+                        updateLockoutTimer(remainingSeconds);
+
+                        if (remainingSeconds <= 0) {
+                            clearInterval(countdown);
+                            resetAttempts();
+                            showLockout(false);
+                        }
+                    }, 1000);
+
+                    showLockout(true);
+                }
+            };
+
+            // 重置尝试次数
+            const resetAttempts = function() {
+                localStorage.removeItem('activationAttempts');
+                localStorage.removeItem('activationLockout');
+            };
+
+            // 显示错误消息
+            const showError = function(message) {
+                errorText.textContent = message;
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    errorMessage.classList.remove('opacity-0', 'translate-y-2');
+                }, 10);
+
+                // 输入框添加错误样式
+                activationCodeInput.classList.add('border-danger');
+
+                // 3秒后隐藏错误消息
+                setTimeout(() => {
+                    errorMessage.classList.add('opacity-0', 'translate-y-2');
+                    setTimeout(() => {
+                        errorMessage.classList.add('hidden');
+                        activationCodeInput.classList.remove('border-danger');
+                    }, 300);
+                }, 3000);
+            };
+
+            // 表单提交处理
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // 检查是否被锁定
+                if (checkLockout()) {
+                    return;
+                }
+
+                const code = activationCodeInput.value.trim();
+
+                // 显示加载状态
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 验证中...';
+
+                // 模拟验证过程
+                setTimeout(function() {
+                    // 验证激活码
+                    if (!activationCodeRegex.test(code)) {
+                        // 验证失败
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<span>验证激活码</span><i class="fa fa-arrow-right"></i>';
+
+                        showError('激活码格式不正确，请输入12位包含数字和字母的激活码');
+                        incrementAttempts();
+                        return;
+                    }
+
+                    // 验证成功
+                    successMessage.classList.remove('hidden');
+                    setTimeout(function() {
+                        successMessage.classList.remove('opacity-0', 'translate-y-4');
+                    }, 10);
+
+                    // 保存激活状态（如果勾选）
+                    if (rememberStatus.checked) {
+                        const thirtyDays = 30 * 24 * 60 * 60 * 1000; // 30天的毫秒数
+                        const expirationDate = new Date(Date.now() + thirtyDays);
+                        localStorage.setItem('activationStatus', 'active');
+                        localStorage.setItem('activationExpiry', expirationDate.toISOString());
+                    }
+
+                    // 重置尝试次数
+                    resetAttempts();
+
+                    // 模拟跳转
+                    setTimeout(function() {
+                        window.location.href = 'https://example.com/dashboard'; // 替换为实际跳转URL
+                    }, 2000);
+                }, 1500);
+            });
+
+            // 检查是否已激活
+            const checkActivationStatus = function() {
+                const status = localStorage.getItem('activationStatus');
+                const expiry = localStorage.getItem('activationExpiry');
+
+                if (status === 'active' && expiry) {
+                    const expiryDate = new Date(expiry);
+                    if (expiryDate > new Date()) {
+                        // 已激活且未过期，直接跳转
+                        window.location.href = 'https://example.com/dashboard'; // 替换为实际跳转URL
+                    } else {
+                        // 已过期，清除状态
+                        localStorage.removeItem('activationStatus');
+                        localStorage.removeItem('activationExpiry');
+                    }
+                }
+            };
+
+            // 页面加载时检查激活状态和锁定状态
+            checkActivationStatus();
+            checkLockout();
+        });
+    </script>
+</body>
+</html>

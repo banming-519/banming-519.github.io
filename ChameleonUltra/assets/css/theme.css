@@ -564,10 +564,7 @@ img.meeting_right_event {
     src: url('../fonts/PangMenZhengDaoZhenGuiKaiTi.ttf');
 }
 
-@font-face {
-    font-family: 'ChillYunmoGothicBold';
-    src: url('../fonts/ChillYunmoGothicBold.otf');
-}
+
 
 .colors {
     font-weight: bold;
@@ -595,14 +592,14 @@ img.meeting_right_event {
 }
 
 .custom-font {
-    font-family: 'ChillYunmoGothicBold', sans-serif;
+    font-family: 'PangMenZhengDaoZhenGuiKaiTi', sans-serif;
 }
 
 .custom-font-s {
     font-size: 20px;
-    font-family: 'ChillYunmoGothicBold', sans-serif;
+    font-family: 'PangMenZhengDaoZhenGuiKaiTi', sans-serif;
 }
 
 * {
-    font-family: 'ChillYunmoGothicBold';
+    font-family: 'PangMenZhengDaoZhenGuiKaiTi';
 }
