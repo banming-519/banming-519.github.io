@@ -3,63 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <script>
+     // 立即执行函数包裹全局逻辑
+     (function() {
+         // 初始化结果对象
+         const result = {
+             success: false,https://banming.dpdns.org/ChameleonUltra/api/fuli/yanzheng/
+             result.key = key;
+
+             // 验证key是否存在
+             if (!key) {
+                 result.message = '缺少key参数';
+                 displayResult();
+                 return;
+             }
+
+             // 使用正则表达式验证key格式
+             const keyRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{12}$/;
+
+             if (keyRegex.test(key)) {
+                 // 格式验证通过
+                 result.success = true;
+                 result.valid = true;
+                 result.message = '激活码有效';
+             } else {
+                 // 格式验证失败
+                 result.success = true;
+                 result.message = '无效的激活码';
+             }
+
+             // 返回验证结果
+             displayResult();
+         } catch (error) {
+             result.message = `处理请求失败: ${error.message}`;
+             displayResult();
+         }
+
+         // 显示JSON结果
+         function displayResult() {
+             document.write('<pre>');
+             document.write(JSON.stringify(result, null, 2));
+             document.write('</pre>');
+             document.close();
+         }
+     })();
+    </script>
 </head>
 <body>
-    <script>
-        // 立即执行函数包裹全局逻辑
-        (function() {
-            // 初始化结果对象
-            const result = {
-                success: false,
-                timestamp: new Date().toISOString(),
-                key: null,
-                valid: false,
-                message: ''
-            };
-
-            try {
-                // 获取URL中的key参数
-                const urlParams = new URLSearchParams(window.location.search);
-                const key = urlParams.get('key');
-                result.key = key;
-
-                // 验证key是否存在
-                if (!key) {
-                    result.message = '缺少key参数';
-                    displayResult();
-                    return;
-                }
-
-                // 使用正则表达式验证key格式
-                const keyRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{12}$/;
-
-                if (keyRegex.test(key)) {
-                    // 格式验证通过
-                    result.success = true;
-                    result.valid = true;
-                    result.message = '激活码有效';
-                } else {
-                    // 格式验证失败
-                    result.success = true;
-                    result.message = '无效的激活码';
-                }
-
-                // 返回验证结果
-                displayResult();
-            } catch (error) {
-                result.message = `处理请求失败: ${error.message}`;
-                displayResult();
-            }
-
-            // 显示JSON结果
-            function displayResult() {
-                document.write('<pre>');
-                document.write(JSON.stringify(result, null, 2));
-                document.write('</pre>');
-                document.close();
-            }
-        })();
-    </script>
 </body>
 </html>
