@@ -1,123 +1,221 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-
+<html lang="zh-CN">
 <head>
-    <!--感谢所有参与到网站制作、找问题的用户-->
-    <!--以下为参与到网站制作、找问题的用户名单-->
-    <!------------------------------------->
-    <!--             参与编辑：          -->
-    <!--            @砸龙换新的       	 -->
-    <!--             @编织@梦             -->
-    <!--              @小晨喵             -->
-    <!--    @辞.flipper鸿蒙os嵌入式开发   -->
-    <!------------------------------------->
-    <!--             参与检查：           -->
-    <!--            @砸龙换新的       	 -->
-    <!--             @编织@梦             -->
-    <!--            @NodYoung            -->
-    <!--               @撕夜              -->
-    <!--              @小晨喵             -->
-    <!--              @贺之然             -->
-    <!--       以及所有访问过网站的用户   -->
-    <!------------------------------------->
-    <!--             参与部署：            -->
-    <!--     @MR.SIX（cu.511116.xyz/）    -->
-    <!--   @编织@梦（video.majunfei.club） -->
-    <!--            @砸龙换新的            -->
-    <!--https://banming.dpdns.org/ChameleonUltra/-->
-    <!------------------------------------->
-    <title>福利下载 - 您已验证成功</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Keywords" Content="自动,自动轮询,门禁复制,手动换卡,自动换卡,自动切换,自动,轮询,电梯,考勤,卡,IC卡,ID卡,变色龙,Ultra,ChameleonUltra,Chameleon,固件">
-    <meta name="Description" Content="变色龙轮询固件是一款非常好用的定制固件，可以实现多卡自动切换，最新还有自适应切换，摆脱手动换卡的繁琐。更有16卡槽升级，无需更换硬件，手机就可刷固件。详情请加Q群：334145434。">
-    <link rel="icon" href="assets/img/icon/fabicon.ico">
-    <!--::::: animate css :::::::-->
-    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
-    <!--::::: bootstrap css :::::::-->
-    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
-    <!--::::: fontawesome css :::::::-->
-    <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
-    <!--::::: owl carousel css :::::::-->
-    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css">
-    <!--::::: theme css :::::::-->
-    <link rel="stylesheet" href="assets/css/theme.css">
-    <!--::::: inner css :::::::-->
-    <link rel="stylesheet" href="assets/css/inner_pages.css">
-    <!--::::: menu css :::::::-->
-    <link rel="stylesheet" href="assets/css/menu.css">
-    <!--::::: custome css :::::::-->
-    <link rel="stylesheet" href="assets/css/custom_animation.css">
-    <!--::::: btn css :::::::-->
-    <link rel="stylesheet" href="assets/css/btn.css">
-    <!--::::: typographi css :::::::-->
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <!--::::: responsive css :::::::-->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP资源下载中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./assets/css/plugins/fontawesome.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981', // 绿色主色调
+                        secondary: '#0EA5E9', // 蓝色辅助色
+                        dark: '#1E293B', // 深色背景
+                        light: '#F8FAFC', // 浅色背景
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
 
-    <!--:::::jquery 3.2.1 js :::::::-->
-    <script src="assets/js/vendor/jquery.3.3.1.min.js"></script>
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+            }
+
+            .btn-primary {
+                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50;
+            }
+
+            .btn-secondary {
+                @apply bg-white hover:bg-gray-50 text-dark border border-gray-300 font-medium py-2 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-300;
+            }
+        }
+    </style>
 </head>
-
-<body onload="window.open('Files/qr_code_data.zip','_self')">
-
-    <div class="load-wrapp">
-        <div class="load-6">
-            <div class="letter-holder">
-                <div class="l-1 letter">变</div>
-                <div class="l-2 letter">色</div>
-                <div class="l-3 letter">龙</div>
-                <div class="l-4 letter">自</div>
-                <div class="l-5 letter">动</div>
-                <div class="l-6 letter">轮</div>
-                <div class="l-7 letter">询</div>
+<body class="font-inter bg-gradient-to-br from-light to-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-download text-primary text-2xl"></i>
+                <span class="text-xl font-bold text-dark">
+                    <span class="text-primary">VIP</span>下载中心
+                </span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors">首页</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors">资源</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition-colors">最新上传</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-1 bg-primary/10 rounded-full px-3 py-1">
+                    <i class="fa fa-check-circle text-primary"></i>
+                    <span class="text-sm font-medium text-primary">VIP会员</span>
+                </div>
+                <button class="md:hidden text-dark text-xl">
+                    <i class="fa fa-bars"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </nav>
 
-   
-    <!--:::::client area start:::::::-->
-    <div class="client-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 m-auto text-center">
-                    <div class="heading wow fadeInDown" data-wow-delay="1s" data-wow-duration="1s">
-                        <h2 style="color:black;">即将开始下载，若未开始自动下载，请点击下方链接(下载后修改后缀为md或是txt使用)。</h2>
-                        <h3 style="color:black;">仅供学习使用，禁止用于违法用途，请在下载后的24小时之内删除，您所造成的一切后果与网站开发团队、福利提供者无关。</h3>
-                        <br>
-                        <a href="Files/qr_code_data.zip" download>手动下载</a>
+    <!-- 英雄区域 -->
+    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-primary/5 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center space-x-2 mb-4 bg-primary/10 text-primary rounded-full px-4 py-1.5 animate-pulse">
+                    <i class="fa fa-check-circle"></i>
+                    <span class="font-medium">VIP专属资源</span>
+                </div>
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark leading-tight mb-6">
+                    选择您需要的<span class="text-primary">优质资源</span>进行下载
+                </h1>
+                <p class="text-gray-600 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                    作为VIP会员，您可以免费下载所有高质量资源，无限制，满足您的需求。
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <!-- 下载选项列表 -->
+            <div class="space-y-4" id="download-list">
+                <!-- 下载选项 1 -->
+                <div class="download-item bg-white rounded-xl shadow-sm p-4 md:p-6 border-l-4 border-primary card-hover">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="w-full md:w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-file-image-o text-3xl text-primary"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-dark">JLC沉金电路板免费打样考试脚本</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm bg-primary/10 text-primary px-2 py-1 rounded-full">脚本</span>
+                                    <span class="text-sm text-gray-500">2025-07-29</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4 line-clamp-2">全自动帮助您答题，来自于 https://greasyfork.org/zh-CN/scripts/496919-jlc-cj-tk-localdata</p>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-file-archive-o mr-1"></i>34KB
+                                </span>
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-download mr-1"></i> 1,251
+                                </span>
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-star mr-1"></i> 4.9
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center items-center md:items-end gap-3 mt-4 md:mt-0">
+                            <button class="btn-primary w-full md:w-auto" onclick="window.open('download_fl_jlc_m.html')">
+                                <i class="fa fa-download mr-1"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 下载选项 2 -->
+                <div class="download-item bg-white rounded-xl shadow-sm p-4 md:p-6 border-l-4 border-secondary card-hover">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="w-full md:w-16 h-16 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-file-video-o text-3xl text-secondary"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-dark">不知道是什么的好东西 - 来自于@轮询固件~咨询</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm bg-secondary/10 text-secondary px-2 py-1 rounded-full">福利</span>
+                                    <span class="text-sm text-gray-500">每小时自动更新</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4 line-clamp-2">详情请问此福利提供者。此福利与 @砸掉换新的 无关</p>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-download mr-1"></i> 1,271
+                                </span>
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-star mr-1"></i> 4.8
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center items-center md:items-end gap-3 mt-4 md:mt-0">
+                            <button class="btn-primary w-full md:w-auto" onclick="window.open('download_fl_wz_m.html')">
+                                <i class="fa fa-download mr-1"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 下载选项 3 -->
+                <div class="download-item bg-white rounded-xl shadow-sm p-4 md:p-6 border-l-4 border-purple-500 card-hover">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="w-full md:w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-file-audio-o text-3xl text-purple-500"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-dark">敬请期待</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm bg-purple-100 text-purple-500 px-2 py-1 rounded-full">福利</span>
+                                    <span class="text-sm text-gray-500">2025-07-18</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4 line-clamp-2">更多福利正在持续更新中...请持续关注！</p>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-download mr-1"></i> 0
+                                </span>
+                                <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                                    <i class="fa fa-star mr-1"></i> 暂无评价
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--:::::client area end:::::::-->
-    <!--<iframe id="ad" src="/ads" style="position: fixed; right: 0px; bottom: 0px; width: 320px; height: 180px; border: none; z-index: 9999; overflow: hidden;" scrolling="no"></iframe>
-    -====blog area end====-->
-    <div class="copyRight text-center">
-        <class ="beian">
-            <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">豫ICP备20003471号-1 </a>
-            <img src="https://auth.jsszkszwyhlwq1.joint.cmecloud.cn/authui/public/custom/customized/images/footerImg2.png" style="display: inline-block;">
-            <p class="animate" data-animate="fadeInUp" data-delay="2.5s" data-duration="2s">Copyright &copy; 2025 All rights reserved.</p>
-            <p class="animate" data-animate="fadeInUp" data-delay="2.5s" data-duration="2s">网站开发者：@砸掉换新的 @轮询激活码~咨询</p>
-</div>
-    <!--::::: footer area end :::::::-->
+    </main>
+    <footer class="bg-dark text-white py-12">
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 变色龙轮询固件 版权所有</p>
+            </div>
+    </footer>
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3', 'shadow-sm');
+            } else {
+                navbar.classList.add('py-3', 'shadow-sm');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
 
-    <!--:::::popper js :::::::-->
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <!--:::::bootstrap js :::::::-->
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <!--:::::owl carousel js :::::::-->
-    <script src="assets/js/vendor/owl.carousel.min.js"></script>
-    <!--:::::slick nav mobile menu js :::::::-->
-    <script src="assets/js/plugins/wow.min.js"></script>
-    <!--:::::slick nav mobile menu js :::::::-->
-    <script src="assets/js/plugins/tilt.jquery.min.js"></script>
-    <!--:::::jquery ui js :::::::-->
-    <script src="assets/js/plugins/jqueryUI.js"></script>
-    <script src="assets/js/plugins/jquery.nav.js"></script>
-    <!--:::::main js :::::::-->
-    <script src="assets/js/main.js"></script>
+        // 卡片悬停动画
+        document.querySelectorAll('.download-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.classList.add('shadow-lg');
+            });
+            item.addEventListener('mouseleave', function() {
+                this.classList.remove('shadow-lg');
+            });
+        });
+    </script>
 </body>
-
 </html>
