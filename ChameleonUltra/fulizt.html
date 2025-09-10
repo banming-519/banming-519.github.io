@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>��֤������</title>
+    <title>验证处理中</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -69,51 +69,51 @@
     </style>
 </head>
 <body class="font-inter bg-gray-50 min-h-screen flex items-center justify-center p-4">
-    <!-- ����װ��Ԫ�� -->
+    <!-- 背景装饰元素 -->
     <div class="fixed inset-0 overflow-hidden -z-10">
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-secondary/5"></div>
         <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/10 blur-3xl"></div>
         <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-secondary/10 blur-3xl"></div>
     </div>
 
-    <!-- ����Ƭ -->
+    <!-- 主卡片 -->
     <div class="max-w-md w-full mx-auto relative z-10">
         <div class="bg-white rounded-2xl card-shadow overflow-hidden transform transition-all duration-500 hover:shadow-xl">
-            <!-- ͷ������ -->
+            <!-- 头部区域 -->
             <div class="bg-gradient-primary p-8 text-white relative overflow-hidden">
                 <div class="absolute inset-0 opacity-20">
                     <i class="fa fa-cog text-[200px] absolute -right-20 -bottom-20 transform rotate-12 pulse-animation"></i>
                 </div>
                 <div class="relative z-10">
-                    <h1 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-shadow mb-2">������</h1>
-                    <p class="opacity-90">������֤��������</p>
+                    <h1 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-shadow mb-2">处理中</h1>
+                    <p class="opacity-90">正在验证您的请求</p>
                 </div>
             </div>
 
-            <!-- �������� -->
+            <!-- 内容区域 -->
             <div class="p-8 space-y-6 text-center">
                 <div class="space-y-4">
                     <div class="flex justify-center">
                         <div id="loadingIndicator" class="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
                     </div>
 
-                    <h2 class="text-lg font-medium text-gray-800">������֤��������</h2>
-                    <p class="text-gray-600" id="statusMessage">���Ժ�ϵͳ���ڴ�����������...</p>
+                    <h2 class="text-lg font-medium text-gray-800">正在验证您的令牌</h2>
+                    <p class="text-gray-600" id="statusMessage">请稍候，系统正在处理您的请求...</p>
                 </div>
 
-                <!-- ����ָʾ�� -->
+                <!-- 进度指示器 -->
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
                     <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-500" style="width: 25%"></div>
                 </div>
 
-                <!-- ������� (Ĭ������) -->
+                <!-- 结果区域 (默认隐藏) -->
                 <div id="resultContainer" class="hidden space-y-4 pt-4">
                     <div id="resultIcon" class="text-5xl mx-auto"></div>
                     <h2 id="resultTitle" class="text-xl font-bold text-gray-800"></h2>
                     <p id="resultMessage" class="text-gray-600"></p>
 
                     <button id="actionButton" class="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                        ������ҳ
+                        返回首页
                     </button>
                 </div>
             </div>
@@ -131,22 +131,22 @@
             const resultMessage = document.getElementById('resultMessage');
             const actionButton = document.getElementById('actionButton');
 
-            // ����URL����
+            // 解析URL参数
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
 
-            // ����Ƿ���token����
+            // 检查是否有token参数
             if (!token) {
-                showResult('error', 'ȱ������', 'URL��δ������Ч��token����', 'fa-exclamation-circle', '���³���');
+                showResult('error', '缺少令牌', 'URL中未包含有效的token参数', 'fa-exclamation-circle', '重新尝试');
                 return;
             }
 
-            // ���½�����
+            // 更新进度条
             const updateProgress = function(percent) {
                 progressBar.style.width = `${percent}%`;
             };
 
-            // ��ʾ���
+            // 显示结果
             const showResult = function(type, title, message, iconClass, buttonText) {
                 loadingIndicator.classList.add('hidden');
                 resultContainer.classList.remove('hidden');
@@ -154,9 +154,9 @@
                 resultIcon.className = `text-5xl mx-auto ${type === 'success' ? 'text-accent' : type === 'error' ? 'text-danger' : 'text-warning'} ${iconClass}`;
                 resultTitle.textContent = title;
                 resultMessage.textContent = message;
-                actionButton.textContent = buttonText || '������ҳ';
+                actionButton.textContent = buttonText || '返回首页';
 
-                // ƽ����ʾ���
+                // 平滑显示结果
                 resultContainer.style.opacity = '0';
                 resultContainer.style.transform = 'translateY(20px)';
                 setTimeout(() => {
@@ -166,7 +166,7 @@
                 }, 10);
             };
 
-            // ģ�����
+            // 模拟进度
             let progress = 25;
             const progressInterval = setInterval(() => {
                 progress += Math.random() * 15;
@@ -176,95 +176,95 @@
                 updateProgress(Math.min(progress, 75));
             }, 500);
 
-            // ��API��ȡ����
+            // 从API获取配置
             const fetchConfig = function() {
                 fetch('/api/fuli/yanzheng.json')
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error('�޷���ȡ�����ļ�');
+                            throw new Error('无法获取配置文件');
                         }
                         return response.json();
                     })
                     .then(data => {
                         updateProgress(85);
-                        statusMessage.textContent = '������֤...';
+                        statusMessage.textContent = '正在验证...';
 
-                        // ģ�⴦���ӳ�
+                        // 模拟处理延迟
                         setTimeout(() => {
                             processToken(data);
                         }, 1000);
                     })
                     .catch(error => {
-                        console.error('��ȡ����ʧ��:', error);
-                        showResult('error', 'ϵͳ����', '�޷���ȡ��֤���ã����Ժ�����', 'fa-times-circle');
+                        console.error('获取配置失败:', error);
+                        showResult('error', '系统错误', '无法获取验证配置，请稍后再试', 'fa-times-circle');
                     });
             };
 
-            // ����token
+            // 处理token
             const processToken = function(config) {
                 const tokenData = config.tokens.find(item => item.token === token);
 
                 if (!tokenData) {
-                    showResult('error', '��Ч����', '���ṩ�����Ʋ����ڻ��ѹ���', 'fa-exclamation-circle');
+                    showResult('error', '无效令牌', '您提供的令牌不存在或已过期', 'fa-exclamation-circle');
                     return;
                 }
 
                 updateProgress(95);
-                statusMessage.textContent = `����ִ�в���: ${tokenData.action}...`;
+                statusMessage.textContent = `正在执行操作: ${tokenData.action}...`;
 
-                // ģ�⴦���ӳ�
+                // 模拟处理延迟
                 setTimeout(() => {
                     executeAction(tokenData.action);
                 }, 1000);
             };
 
-            // ִ�ж�Ӧ����
+            // 执行对应操作
             const executeAction = function(action) {
                 updateProgress(100);
 
                 switch(action) {
                     case 'clear_login':
-                        // �����¼״̬
+                        // 清除登录状态
                         localStorage.removeItem('user_token');
                         localStorage.removeItem('user_data');
-                        showResult('success', '�ǳ��ɹ�', '���ĵ�¼״̬�ѱ����', 'fa-sign-out', '���µ�¼');
+                        showResult('success', '登出成功', '您的登录状态已被清除', 'fa-sign-out', '重新登录');
                         actionButton.addEventListener('click', () => {
-                            window.location.href = '/login'; // �滻Ϊʵ�ʵ�¼ҳ��URL
+                            window.location.href = '/login'; // 替换为实际登录页面URL
                         });
                         break;
 
                     case 'activate':
-                        // ����ɹ�
+                        // 激活成功
                         localStorage.setItem('activationStatus', 'active');
                         const thirtyDays = 30 * 24 * 60 * 60 * 1000;
                         const expirationDate = new Date(Date.now() + thirtyDays);
                         localStorage.setItem('activationExpiry', expirationDate.toISOString());
-                        showResult('success', '����ɹ�', '�����˻��ѳɹ����������ת����Ա����...', 'fa-check-circle');
+                        showResult('success', '激活成功', '您的账户已成功激活，正在跳转至会员中心...', 'fa-check-circle');
 
-                        // �Զ���ת
+                        // 自动跳转
                         setTimeout(() => {
-                            window.location.href = '/dashboard'; // �滻Ϊʵ�ʻ�Ա����URL
+                            window.location.href = '/dashboard'; // 替换为实际会员中心URL
                         }, 2000);
                         break;
 
                     case 'lock':
-                        // �����˻�
+                        // 锁定账户
                         localStorage.setItem('account_locked', 'true');
-                        showResult('warning', '�˻�������', '�����˻��ѱ���ʱ����������ϵ�ͷ�����', 'fa-lock', '��ϵ�ͷ�');
+                        showResult('warning', '账户已锁定', '您的账户已被临时锁定，请联系客服解锁', 'fa-lock', '联系客服');
                         actionButton.addEventListener('click', () => {
-                            window.location.href = '/support'; // �滻Ϊʵ�ʿͷ�ҳ��URL
+                            window.location.href = '/support'; // 替换为实际客服页面URL
                         });
                         break;
 
                     default:
-                        showResult('error', 'δ֪����', '����ָ���Ĳ���������Ч', 'fa-question-circle');
+                        showResult('error', '未知操作', '令牌指定的操作类型无效', 'fa-question-circle');
                 }
             };
 
-            // ģ�����������ӳ�
+            // 模拟网络请求延迟
             setTimeout(fetchConfig, 1500);
 
-            // ������ҳ��ť
+            // 返回首页按钮
             actionButton.addEventListener('click', () => {
                 window.location.href = '/';
             });
