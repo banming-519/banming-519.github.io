@@ -5,12 +5,15 @@
 	"music_url": [
 		"https://banming.dpdns.org/Files/ZL_iC_Edit/music.mp3"
 	],
-	"news": "",
+	"music_len": [
+		134000
+	]
 	"text_num": 2,
 	"text": [
 		"今天比明天好，这就是希望",
 		"所有的好，都不如刚刚好"
 	],
+	"news": "",
 	"updata_text": "",
 	"last_updated": "2025年11月08日"
 }
