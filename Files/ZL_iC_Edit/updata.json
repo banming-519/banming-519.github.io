@@ -1,0 +1,16 @@
+{
+	"version": "1.0.0.2",
+	"available_version": "1.0.0.1",
+	"music_num": 1,
+	"music_url": [
+		"https://banming.dpdns.org/Files/ZL_iC_Edit/music.mp3"
+	],
+	"news": "",
+	"text_num": 2,
+	"text": [
+		"今天比明天好，这就是希望",
+		"所有的好，都不如刚刚好"
+	],
+	"updata_text": "",
+	"last_updated": "2025年11月08日"
+}
