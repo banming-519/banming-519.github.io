@@ -1,7 +1,7 @@
 {
 	"version": "1.0.0.3",
 	"version_num": 1003,
-	"available_version": 1002,
+	"available_version": 1003,
 	"music_num": 1,
 	"music_url": [
 		"https://banming.dpdns.org/Files/ZL_iC_Edit/music.mp3"
@@ -16,6 +16,6 @@
 	],
 	"word": null,
 	"news": "修复用iC助手设为打开dump文件应用时数据会被公告覆盖的问题",
-	"updata_url": "https://banming.dpdns.org/Files/ZL_iC_Edit/iC_Edit.exe",
+	"updata_url": "https://banming.dpdns.org/Files/ZL_iC_Edit/砸龙iC卡修改分析工具.exe",
 	"last_updated": "2025年11月08日"
 }
