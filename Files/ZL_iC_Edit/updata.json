@@ -1,6 +1,6 @@
 {
-	"version": "1.0.0.2",
-	"version_num": 1002,
+	"version": "1.0.0.3",
+	"version_num": 1003,
 	"available_version": 1002,
 	"music_num": 1,
 	"music_url": [
@@ -15,7 +15,7 @@
 		"所有的好，都不如刚刚好"
 	],
 	"word": null,
-	"news": "增加数据分析，数据格式化",
+	"news": "修复用iC助手设为打开dump文件应用时数据会被公告覆盖的问题",
 	"updata_url": "https://banming.dpdns.org/Files/ZL_iC_Edit/iC_Edit.exe",
 	"last_updated": "2025年11月08日"
 }
