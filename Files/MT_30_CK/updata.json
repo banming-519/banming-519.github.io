@@ -1,0 +1,25 @@
+{
+	"version": "1.0.0.1",
+	"version_num": 1001,
+	"available_version": 1001,
+	"music_num": 1,
+	"music_url": [
+		"https://banming.dpdns.org/Files/_MT_30_CK/music.mp3"
+	],
+	"music_len": [
+		134020
+	]
+	"text_num": 5,
+	"text": [
+		"今天比明天好，这就是希望",
+		"所有的好，都不如刚刚好",
+		"没有功德圆满，没有一步登天。",
+		"请努力向上，成为别人眼中遥不可及的光。",
+		"我觉得今生最开心的事，就是上天让我们相遇。"
+	],
+	"word": "此程序仅供娱乐，无实际作用！",
+	"news": "",
+	"updata_url": "",
+	"download_url": "",
+	"last_updated": "2025年11月09日"
+}
