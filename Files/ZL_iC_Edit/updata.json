@@ -5,9 +5,11 @@
 	"music_num": 1,
 	"music_url": [
 		"https://banming.dpdns.org/Files/ZL_iC_Edit/music.mp3"
+		"https://banming.dpdns.org/Files/ZL_iC_Edit/music2.mp3"
 	],
 	"music_len": [
 		134020
+		320000
 	]
 	"text_num": 5,
 	"text": [
