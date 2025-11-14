@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>麦田助手支持系统查询</title>
+  <title>麦田IC助手支持系统查询</title>
   <link rel="icon" href="favicon.ico">
   <!-- 引入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -69,12 +69,13 @@
       </div>
     </div>
 
-    <!-- 表格区域 -->
-    <div class="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 hover:shadow-hover">
+    <!-- 表格区域 - 增加了相对定位用于sticky表头 -->
+    <div class="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 hover:shadow-hover relative">
       <div class="overflow-x-auto">
         <table class="w-full min-w-[768px]">
           <thead>
-            <tr class="bg-primary text-white">
+            <!-- 表头增加sticky定位和z-index -->
+            <tr class="bg-primary text-white sticky top-0 z-10">
               <th class="py-4 px-6 text-left text-lg font-semibold">系统名称</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">延期</th>
@@ -105,7 +106,8 @@
   <!-- 页脚 -->
   <footer class="bg-white mt-12 py-6 border-t border-gray-100">
     <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-      <p>麦田助手系统支持查询  仅为方便卡匠使用，禁止用于违法用途 | by 瑜众不同 的 QQ：991069003，砸掉换新的 QQ：3374963142</p>
+      <p>麦田助手系统支持查询  仅为方便卡匠使用，禁止用于违法用途 | by 瑜众不同 的 QQ：991069003</p>
+      <b>备案号：<a href="https://beian.miit.gov.cn/#/Integrated/index">鲁ICP备2022008843号-2</a></b>
     </div>
   </footer>
 
@@ -250,8 +252,8 @@
             <td class="py-4 px-6 text-center">${getStatusIcon(config.analysis)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.date)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.newcard)}</td>
-			<td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.xiaoqu)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
             <td class="py-4 px-6 text-center ${config.price ? 'text-primary font-medium' : 'text-gray-500'}">${priceDisplay}</td>
           </tr>
         `;
