@@ -32,6 +32,12 @@
       }
     }
   </script>
+  <style>
+	.ontop {
+		position: fixed;
+		top: 30;
+		width: 100%;
+	}</style>
 </head>
 <body class="font-inter bg-neutral min-h-screen text-dark">
   <!-- 顶部导航栏 -->
@@ -84,7 +90,7 @@
         <table class="w-full min-w-[768px]">
           <thead>
             <!-- 表头sticky定位，确保相对于视口固定 -->
-            <tr class="bg-primary text-white sticky top-0 z-10">
+            <tr class="bg-primary text-white sticky top-0 z-10 ontop">
               <th class="py-4 px-6 text-left text-lg font-semibold">系统名称</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">延期</th>
@@ -115,8 +121,7 @@
   <!-- 页脚 -->
   <footer class="bg-white mt-12 py-6 border-t border-gray-100">
     <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-      <p>麦田助手系统支持查询  仅为方便卡匠使用，禁止用于违法用途 | by 瑜众不同 的 QQ：991069003</p>
-      <b>备案号：<a href="https://beian.miit.gov.cn/#/Integrated/index">鲁ICP备2022008843号-2</a></b>
+      <p>麦田助手系统支持查询 | 仅为方便卡匠使用，禁止用于违法用途 | by 砸掉换新的的 QQ：3374963142</p>
     </div>
   </footer>
 
