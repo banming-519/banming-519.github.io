@@ -79,8 +79,8 @@
               <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">延期</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">发卡</th>
-              <th class="py-4 px-6 text-center text-lg font-semibold">通小区</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">通单元</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">通小区</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">价格</th>
             </tr>
           </thead>
@@ -250,8 +250,8 @@
             <td class="py-4 px-6 text-center">${getStatusIcon(config.analysis)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.date)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.newcard)}</td>
+			<td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.xiaoqu)}</td>
-            <td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
             <td class="py-4 px-6 text-center ${config.price ? 'text-primary font-medium' : 'text-gray-500'}">${priceDisplay}</td>
           </tr>
         `;
