@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>麦田助手支持系统查询 测试版</title>
+  <!-- 引入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入 Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- 配置 Tailwind 自定义主题 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#4080FF',
+            accent: '#0FC6C2',
+            neutral: '#F5F7FA',
+            dark: '#1D2129',
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+            'hover': '0 8px 30px rgba(22, 93, 255, 0.15)',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+      .highlight {
+        background-color: #FFF3CD;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+    }
+  </style>
+</head>
+<body class="font-inter bg-neutral min-h-screen text-dark">
+  <!-- 顶部导航栏 -->
+  <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300" id="header">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-search text-primary text-2xl"></i>
+        <h1 class="text-[clamp(1.2rem,3vw,1.8rem)] font-bold text-primary">麦田助手支持系统查询</h1>
+      </div>
+      <div class="text-sm text-gray-500 hidden md:block">
+        <span id="lastUpdate">数据加载中...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- 搜索区域 -->
+    <div class="mb-8 bg-white rounded-xl shadow-card p-6 transform hover:shadow-hover transition-all-300">
+      <div class="relative">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="输入系统名搜索（如：康拓1）" 
+          class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all-300 text-lg"
+        >
+        <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <button id="clearSearch" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden">
+          <i class="fa fa-times-circle"></i>
+        </button>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-sm text-gray-500"><i class="fa fa-info-circle text-primary mr-1"></i> 支持模糊搜索，匹配系统名包含关键词的结果</span>
+        <span class="text-sm text-gray-500"><i class="fa fa-check-circle text-accent mr-1"></i> 标识表示支持该功能</span>
+      </div>
+    </div>
+
+    <!-- 表格区域 -->
+    <div class="bg-white rounded-xl shadow-card overflow-hidden transform hover:shadow-hover transition-all-300">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[768px]">
+          <thead>
+            <tr class="bg-primary text-white">
+              <th class="py-4 px-6 text-left text-lg font-semibold">系统名称</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">延期</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">发卡</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">通小区</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">通单元</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">价格</th>
+            </tr>
+          </thead>
+          <tbody id="systemTableBody" class="divide-y divide-gray-100">
+            <!-- 表格内容将通过JS动态生成 -->
+            <tr>
+              <td colspan="7" class="py-16 text-center text-gray-500">
+                <i class="fa fa-spinner fa-spin text-2xl mb-4 block"></i>
+                <p>数据加载中，请稍候...</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 无结果提示 -->
+      <div id="noResult" class="py-16 text-center text-gray-500 hidden">
+        <i class="fa fa-search text-3xl mb-4 block text-gray-300"></i>
+        <p>未找到匹配的系统，请尝试其他搜索关键词</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-white mt-12 py-6 border-t border-gray-100">
+    <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+      <p>麦田助手系统支持查询  仅为方便卡匠使用，禁止用于违法用途 | by 砸掉换新的 QQ3374963142</p>
+    </div>
+  </footer>
+
+  <!-- 更新提示弹窗 -->
+  <div id="updateModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
+          <i class="fa fa-refresh text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-dark mb-2">数据更新提示</h3>
+        <p class="text-gray-500">已有1小时未更新数据，是否刷新获取最新信息？</p>
+      </div>
+      <div class="flex space-x-4">
+        <button id="cancelUpdate" class="flex-1 py-3 px-4 border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-all-300">
+          稍后更新
+        </button>
+        <button id="confirmUpdate" class="flex-1 py-3 px-4 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all-300">
+          立即更新
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 全局变量
+    let systemData = {};
+    let searchKeyword = '';
+    
+    // DOM元素
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const tableBody = document.getElementById('systemTableBody');
+    const noResult = document.getElementById('noResult');
+    const lastUpdate = document.getElementById('lastUpdate');
+    const updateModal = document.getElementById('updateModal');
+    const modalContent = document.getElementById('modalContent');
+    const confirmUpdate = document.getElementById('confirmUpdate');
+    const cancelUpdate = document.getElementById('cancelUpdate');
+    const header = document.getElementById('header');
+    
+    // 页面滚动效果
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        header.classList.add('py-2', 'shadow');
+        header.classList.remove('py-4', 'shadow-sm');
+      } else {
+        header.classList.add('py-4', 'shadow-sm');
+        header.classList.remove('py-2', 'shadow');
+      }
+    });
+    
+    // 格式化时间
+    function formatTime(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hour = String(date.getHours()).padStart(2, '0');
+      const minute = String(date.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hour}:${minute}`;
+    }
+    
+    // 请求数据
+    async function fetchSystemData() {
+      try {
+        // 显示加载状态
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-16 text-center text-gray-500">
+              <i class="fa fa-spinner fa-spin text-2xl mb-4 block"></i>
+              <p>数据加载中，请稍候...</p>
+            </td>
+          </tr>
+        `;
+        
+        const response = await fetch('MTHelp.json');
+        if (!response.ok) throw new Error('数据加载失败');
+        
+        const data = await response.json();
+        systemData = data.ic_help || {};
+        
+        // 更新最后更新时间
+        const now = new Date();
+        lastUpdate.textContent = `最后更新：${formatTime(now)}`;
+        
+        // 渲染表格
+        renderTable();
+        
+      } catch (error) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-16 text-center text-red-500">
+              <i class="fa fa-exclamation-circle text-2xl mb-4 block"></i>
+              <p>${error.message}</p>
+              <button onclick="fetchSystemData()" class="mt-4 text-primary hover:underline">重试</button>
+            </td>
+          </tr>
+        `;
+        console.error('数据加载错误:', error);
+      }
+    }
+    
+    // 渲染表格
+    function renderTable() {
+      const systems = Object.entries(systemData);
+      let filteredSystems = systems;
+      
+      // 搜索过滤
+      if (searchKeyword.trim()) {
+        const keyword = searchKeyword.trim().toLowerCase();
+        filteredSystems = systems.filter(([name]) => 
+          name.toLowerCase().includes(keyword)
+        );
+      }
+      
+      // 显示无结果
+      if (filteredSystems.length === 0) {
+        tableBody.innerHTML = '';
+        noResult.classList.remove('hidden');
+        return;
+      }
+      
+      noResult.classList.add('hidden');
+      
+      // 生成表格内容
+      let tableHtml = '';
+      filteredSystems.forEach(([name, config]) => {
+        // 高亮匹配的关键词
+        let displayName = name;
+        if (searchKeyword.trim()) {
+          const keyword = searchKeyword.trim();
+          const regex = new RegExp(`(${keyword})`, 'gi');
+          displayName = name.replace(regex, '<span class="highlight">$1</span>');
+        }
+        
+        // 功能状态转换
+        const getStatusIcon = (value) => value === 1 ? 
+          '<i class="fa fa-check text-accent text-xl"></i>' : '';
+        
+        // 价格显示
+        const priceDisplay = config.price ? config.price : '免费';
+        
+        // 行动画效果
+        tableHtml += `
+          <tr class="hover:bg-neutral/50 transition-all-300">
+            <td class="py-4 px-6 font-medium text-lg" dangerouslySetInnerHTML="${{__html: displayName}}"></td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.analysis)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.date)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.newcard)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.xiaoqu)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
+            <td class="py-4 px-6 text-center ${config.price ? 'text-primary font-medium' : 'text-gray-500'}">${priceDisplay}</td>
+          </tr>
+        `;
+      });
+      
+      tableBody.innerHTML = tableHtml;
+      
+      // 添加行入场动画
+      const rows = tableBody.querySelectorAll('tr');
+      rows.forEach((row, index) => {
+        row.style.opacity = '0';
+        row.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          row.style.transition = 'all 0.3s ease';
+          row.style.opacity = '1';
+          row.style.transform = 'translateY(0)';
+        }, 50 * index);
+      });
+    }
+    
+    // 搜索功能
+    searchInput.addEventListener('input', (e) => {
+      searchKeyword = e.target.value;
+      renderTable();
+      
+      // 显示/隐藏清除按钮
+      if (searchKeyword.trim()) {
+        clearSearch.classList.remove('hidden');
+      } else {
+        clearSearch.classList.add('hidden');
+      }
+    });
+    
+    // 清除搜索
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      searchKeyword = '';
+      clearSearch.classList.add('hidden');
+      renderTable();
+      searchInput.focus();
+    });
+    
+    // 弹窗控制
+    function showUpdateModal() {
+      updateModal.classList.remove('hidden');
+      setTimeout(() => {
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+    
+    function hideUpdateModal() {
+      modalContent.classList.remove('scale-100', 'opacity-100');
+      modalContent.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        updateModal.classList.add('hidden');
+      }, 300);
+    }
+    
+    // 确认更新
+    confirmUpdate.addEventListener('click', () => {
+      hideUpdateModal();
+      fetchSystemData();
+    });
+    
+    // 取消更新
+    cancelUpdate.addEventListener('click', hideUpdateModal);
+    
+    // 点击模态框背景关闭
+    updateModal.addEventListener('click', (e) => {
+      if (e.target === updateModal) hideUpdateModal();
+    });
+    
+    // 每小时提示更新
+    setInterval(showUpdateModal, 3600000); // 3600000ms = 1小时
+    
+    // 初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchSystemData();
+      
+      // 搜索框聚焦效果
+      searchInput.focus();
+      
+      // 支持ESC关闭弹窗
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !updateModal.classList.contains('hidden')) {
+          hideUpdateModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
