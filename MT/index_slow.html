@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>麦田助手支持系统查询 测试版</title>
+  <title>麦田助手支持系统查询</title>
   <!-- 引入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入 Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   
   <!-- 配置 Tailwind 自定义主题 -->
   <script>
@@ -127,7 +127,7 @@
   <!-- 页脚 -->
   <footer class="bg-white mt-12 py-6 border-t border-gray-100">
     <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-      <p>麦田助手系统支持查询  仅为方便卡匠使用，禁止用于违法用途 | by 砸掉换新的 QQ3374963142</p>
+      <p>麦田助手系统支持查询 | 仅为方便卡匠使用，禁止用于违法用途 | by 砸掉换新的 QQ3374963142，小瑜</p>
     </div>
   </footer>
 
@@ -255,14 +255,6 @@
       // 生成表格内容
       let tableHtml = '';
       filteredSystems.forEach(([name, config]) => {
-        // 高亮匹配的关键词
-        let displayName = name;
-        if (searchKeyword.trim()) {
-          const keyword = searchKeyword.trim();
-          const regex = new RegExp(`(${keyword})`, 'gi');
-          displayName = name.replace(regex, '<span class="highlight">$1</span>');
-        }
-        
         // 功能状态转换
         const getStatusIcon = (value) => value === 1 ? 
           '<i class="fa fa-check text-accent text-xl"></i>' : '';
