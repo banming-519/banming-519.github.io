@@ -49,6 +49,14 @@
 
   <!-- 主内容区 -->
   <main class="container mx-auto px-4 py-8">
+    <!-- 选项卡区域 -->
+    <div class="mb-6 border-b border-gray-200">
+      <div class="flex space-x-8">
+        <button id="icTab" class="py-3 px-4 text-primary border-b-2 border-primary font-medium text-lg">IC</button>
+        <button id="cpuTab" class="py-3 px-4 text-gray-500 hover:text-primary border-b-2 border-transparent font-medium text-lg">CPU</button>
+      </div>
+    </div>
+
     <!-- 搜索区域 -->
     <div class="mb-8 bg-white rounded-xl shadow-card p-6 transition-all duration-300 hover:shadow-hover">
       <div class="relative">
@@ -69,12 +77,13 @@
       </div>
     </div>
 
-    <!-- 表格区域 - 增加了相对定位用于sticky表头 -->
-    <div class="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 hover:shadow-hover relative">
+    <!-- 表格区域 - 修复sticky表头 -->
+    <div class="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 hover:shadow-hover">
+      <!-- 直接让overflow-x-auto作为表格的父容器 -->
       <div class="overflow-x-auto">
         <table class="w-full min-w-[768px]">
           <thead>
-            <!-- 表头增加sticky定位和z-index -->
+            <!-- 表头sticky定位，确保相对于视口固定 -->
             <tr class="bg-primary text-white sticky top-0 z-10">
               <th class="py-4 px-6 text-left text-lg font-semibold">系统名称</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
@@ -148,6 +157,8 @@
     const confirmUpdate = document.getElementById('confirmUpdate');
     const cancelUpdate = document.getElementById('cancelUpdate');
     const header = document.getElementById('header');
+    const icTab = document.getElementById('icTab');
+    const cpuTab = document.getElementById('cpuTab');
     
     // 页面滚动效果
     window.addEventListener('scroll', () => {
@@ -158,6 +169,20 @@
         header.classList.add('py-4', 'shadow-sm');
         header.classList.remove('py-2', 'shadow');
       }
+    });
+    
+    // 选项卡切换
+    icTab.addEventListener('click', () => {
+      icTab.classList.add('text-primary', 'border-primary');
+      icTab.classList.remove('text-gray-500', 'border-transparent');
+      cpuTab.classList.add('text-gray-500', 'border-transparent');
+      cpuTab.classList.remove('text-primary', 'border-primary');
+      // IC选项卡默认显示当前表格，无需额外操作
+    });
+    
+    cpuTab.addEventListener('click', () => {
+      // 跳转到CPU页面
+      window.location.href = '/cpu';
     });
     
     // 格式化时间
@@ -210,7 +235,7 @@
       }
     }
     
-    // 渲染表格（核心修复：去掉dangerouslySetInnerHTML，直接文本渲染）
+    // 渲染表格
     function renderTable() {
       const systems = Object.entries(systemData);
       let filteredSystems = systems;
@@ -245,7 +270,6 @@
         // 价格显示
         const priceDisplay = config.price ? config.price : '免费';
         
-        // 直接渲染系统名称（去掉所有HTML转义，简单稳定）
         tableHtml += `
           <tr class="hover:bg-neutral/50 transition-all duration-300">
             <td class="py-4 px-6 font-medium text-lg">${name}</td>
