@@ -168,13 +168,21 @@
 			"unit": 1,
 			"price": ""
 		},
+		"鑫洋V10":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 1,
+			"unit": 1,
+			"price": ""
+		},
 		"鑫洋V11":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
 			"xiaoqu": 1,
 			"unit": 1,
-			"price": "部分业主卡扣30点，通卡扣50点"
+			"price": "【免费】部分可以做"
 		},
 		"鑫洋V12":{
 			"analysis": 1,
@@ -364,16 +372,16 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"xiaoqu": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"铁虎X":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"xiaoqu": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"汇兆V3":{
@@ -406,7 +414,7 @@
 			"newcard": 1,
 			"xiaoqu": 1,
 			"unit": 1,
-			"price": "数据修改扣10点"
+			"price": "数据修改扣20点"
 		},
 		"日立":{
 			"analysis": 1,
@@ -436,8 +444,8 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"xiaoqu": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"大江3梯控":{
@@ -446,6 +454,14 @@
 			"newcard": 0,
 			"xiaoqu": 0,
 			"unit": 0,
+			"price": ""
+		},
+		"通力中央梯控":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 1,
+			"unit": 1,
 			"price": ""
 		},
 		"奥的斯梯控":{
@@ -476,25 +492,25 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"xiaoqu": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"大华1变种1梯控":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
-			"price": ""
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": "数据修改扣10点"
 		},
 		"大华1变种2梯控":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
-			"price": ""
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": "数据修改扣10点"
 		},
 		"大华2梯控":{
 			"analysis": 1,
@@ -564,24 +580,24 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": ""
 		},
 		"互联创2变种":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": ""
 		},
 		"互联创3":{
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": "数据修改扣10点"
 		},
 		"互联创3变种1":{
@@ -612,8 +628,8 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": "数据修改扣10点"
 		},
 		"互联创3变种5":{
@@ -629,7 +645,7 @@
 			"date": 1,
 			"newcard": 1,
 			"xiaoqu": 1,
-			"unit": 1,
+			"unit": 0,
 			"price": "数据修改扣10点"
 		},
 		"互联创3变种7":{
@@ -637,7 +653,7 @@
 			"date": 1,
 			"newcard": 1,
 			"xiaoqu": 1,
-			"unit": 1,
+			"unit": 0,
 			"price": "数据修改扣10点"
 		},
 		"互联创4":{
@@ -670,7 +686,7 @@
 			"newcard": 0,
 			"xiaoqu": 0,
 			"unit": 0,
-			"price": ""
+			"price": "通卡修改扣10点"
 		},
 		"蓝蓝V2":{
 			"analysis": 1,
@@ -731,65 +747,57 @@
 		"蓝蓝V5变种4":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V5变种5":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V6":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V6变种1":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V6变种2":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
-			"price": ""
-		},
-		"蓝蓝V6变种2":{
-			"analysis": 1,
-			"date": 1,
-			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V6变种3":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V7变种1":{
 			"analysis": 1,
 			"date": 1,
-			"newcard": 1,
+			"newcard": 0,
 			"xiaoqu": 1,
-			"unit": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"蓝蓝V7变种2":{
@@ -884,8 +892,8 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": ""
 		},
 		"邦瑞4":{
@@ -1044,8 +1052,8 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 0,
-			"unit": 1,
+			"xiaoqu": 1,
+			"unit": 0,
 			"price": ""
 		},
 		"富士梯控":{
@@ -1060,8 +1068,8 @@
 			"analysis": 1,
 			"date": 1,
 			"newcard": 1,
-			"xiaoqu": 1,
-			"unit": 0,
+			"xiaoqu": 0,
+			"unit": 1,
 			"price": ""
 		},
 		"麦田无名梯控2":{
@@ -1086,6 +1094,432 @@
 			"newcard": 1,
 			"xiaoqu": 1,
 			"unit": 1,
+			"price": ""
+		},
+		"鼎博门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"鼎博2门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"立林门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"大华2门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"大华2C门禁":{
+			"analysis": 1,
+			"date": 0,
+			"newcard": 0,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"海湾6门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"麦驰门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"昌博门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"安居宝1门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"安居宝C1门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"安居宝C5门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"捷顺门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"中华门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"嘉泰1门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 0,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"嘉泰2门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 0,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"富士门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"亲邻门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"视得安1门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"视得安2门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"柔乐门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"伴生活门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 0,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"君和睿通门禁":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 0,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		},
+		"麦田无名门禁1":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"麦田无名门禁2":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 1,
+			"price": ""
+		},
+		"麦田无名门禁3":{
+			"analysis": 1,
+			"date": 1,
+			"newcard": 1,
+			"xiaoqu": 0,
+			"unit": 0,
+			"price": ""
+		}
+	},
+	"cpu_help": {
+		"康康A": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"康康A变种1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康A12": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康A13": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康A13变种1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康A13变种2": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康A13变种3": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康B12": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康B12变种1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康B12变种2": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康B12变种3": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣30点"
+		},
+		"康康B12变种4": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康C1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"康康C2": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣20点"
+		},
+		"蓝蓝V2": {
+			"analysis": 0,
+			"xiugai": 0,
+			"read": 0,
+			"w_jiegou": 1,
+			"w_shujv": 0,
+			"price": ""
+		},
+		"蓝蓝V4": {
+			"analysis": 0,
+			"xiugai": 0,
+			"read": 0,
+			"w_jiegou": 1,
+			"w_shujv": 0,
+			"price": ""
+		},
+		"鼎博A": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"鼎博A1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"鼎博A2": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"鼎博A2变种": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"铁虎": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"铁虎X加密": {
+			"analysis": 0,
+			"xiugai": 0,
+			"read": 1,
+			"w_jiegou": 0,
+			"w_shujv": 0,
+			"price": ""
+		},
+		"互联创": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"金博01": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": ""
+		},
+		"金博加密01": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"金博加密01变种": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 0,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"威盛A1": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 0,
+			"w_shujv": 1,
+			"price": "数据修改扣10点"
+		},
+		"前景A2": {
+			"analysis": 1,
+			"xiugai": 1,
+			"read": 1,
+			"w_jiegou": 1,
+			"w_shujv": 1,
 			"price": ""
 		}
 	}

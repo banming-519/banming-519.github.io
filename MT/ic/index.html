@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>麦田CPU助手支持系统查询</title>
+  <title>麦田IC助手支持系统查询</title>
   <link rel="icon" href="../favicon.ico">
   <!-- 引入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,12 @@
       }
     }
   </script>
+  <style>
+	.ontop {
+		position: fixed;
+		top: 30;
+		width: 100%;
+	}</style>
 </head>
 <body class="font-inter bg-neutral min-h-screen text-dark">
   <!-- 顶部导航栏 -->
@@ -39,7 +45,7 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <div class="text-primary text-2xl">🔍</div>
-        <h1 class="text-[clamp(1.2rem,3vw,1.8rem)] font-bold text-primary">麦田CPU助手支持系统查询</h1>
+        <h1 class="text-[clamp(1.2rem,3vw,1.8rem)] font-bold text-primary">麦田IC助手支持系统查询</h1>
       </div>
       <div class="text-sm text-gray-500 hidden md:block">
         <span id="lastUpdate">数据加载中...</span>
@@ -52,9 +58,9 @@
     <!-- 选项卡区域 -->
     <div class="mb-6 border-b border-gray-200">
       <div class="flex space-x-8">
-        <button id="indexTab" class="py-3 px-4 text-gray-500 hover:text-primary border-b-2 border-transparent font-medium text-lg">首页</button>
-        <button id="icTab" class="py-3 px-4 text-gray-500 hover:text-primary border-b-2 border-transparent font-medium text-lg">IC系统</button>
-        <button id="cpuTab" class="py-3 px-4 text-primary border-b-2 border-primary font-medium text-lg">CPU系统</button>
+	    <button id="indexTab" class="py-3 px-4 text-gray-500 hover:text-primary border-b-2 border-transparent font-medium text-lg">CPU系统</button>
+        <button id="icTab" class="py-3 px-4 text-primary border-b-2 border-primary font-medium text-lg">IC系统</button>
+        <button id="cpuTab" class="py-3 px-4 text-gray-500 hover:text-primary border-b-2 border-transparent font-medium text-lg">CPU系统</button>
       </div>
     </div>
 
@@ -64,7 +70,7 @@
         <input 
           type="text" 
           id="searchInput" 
-          placeholder="输入系统名搜索（如：康康A）" 
+          placeholder="输入系统名搜索（如：康拓1）" 
           class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-lg"
         >
         <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</div>
@@ -85,13 +91,13 @@
         <table class="w-full min-w-[768px]">
           <thead>
             <!-- 表头sticky定位，确保相对于视口固定 -->
-            <tr class="bg-primary text-white sticky top-0 z-10">
+            <tr class="bg-primary text-white sticky top-0 z-10 ontop">
               <th class="py-4 px-6 text-left text-lg font-semibold">系统名称</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">识别</th>
-              <th class="py-4 px-6 text-center text-lg font-semibold">修改</th>
-              <th class="py-4 px-6 text-center text-lg font-semibold">读数据</th>
-              <th class="py-4 px-6 text-center text-lg font-semibold">写结构</th>
-              <th class="py-4 px-6 text-center text-lg font-semibold">写数据</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">延期</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">发卡</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">通单元</th>
+              <th class="py-4 px-6 text-center text-lg font-semibold">通小区</th>
               <th class="py-4 px-6 text-center text-lg font-semibold">价格</th>
             </tr>
           </thead>
@@ -158,7 +164,6 @@
     const confirmUpdate = document.getElementById('confirmUpdate');
     const cancelUpdate = document.getElementById('cancelUpdate');
     const header = document.getElementById('header');
-	const indexTab = document.getElementById('indexTab');
     const icTab = document.getElementById('icTab');
     const cpuTab = document.getElementById('cpuTab');
     
@@ -174,37 +179,38 @@
     });
     
     // 选项卡切换
-    icTab.addEventListener('click', () => {
-	  indexTab.classList.add('text-primary', 'border-primary');
-      cpuTab.classList.remove('text-gray-500', 'border-transparent');
-	  
+    cpuTab.addEventListener('click', () => {
       cpuTab.classList.add('text-primary', 'border-primary');
       cpuTab.classList.remove('text-gray-500', 'border-transparent');
 	  
       icTab.classList.add('text-gray-500', 'border-transparent');
       icTab.classList.remove('text-primary', 'border-primary');
+	  
+	  indexTab.classList.add('text-gray-500', 'border-transparent');
+	  indexTab.classList.remove('text-primary', 'border-primary');
     });
     
 	indexTab.addEventListener('click', () => {
-	  cpuTab.classList.add('text-primary', 'border-primary');
-      cpuTab.classList.remove('text-gray-500', 'border-transparent');
+      indexTab.classList.add('text-primary', 'border-primary');
+      index.classList.remove('text-gray-500', 'border-transparent');
 	  
-      cpuTab.classList.add('text-primary', 'border-primary');
-      cpuTab.classList.remove('text-gray-500', 'border-transparent');
+      cpuTab.classList.add('text-gray-500', 'border-transparent');
+      cpuTab.classList.remove('text-primary', 'border-primary');
 	  
-      indexTab.classList.add('text-gray-500', 'border-transparent');
-      indexTab.classList.remove('text-primary', 'border-primary');
+	  icTab.classList.add('text-gray-500', 'border-transparent');
+      icTab.classList.remove('text-primary', 'border-primary');
     });
 	
-    icTab.addEventListener('click', () => {
-      // 跳转到ic页面
-      window.location.href = '../ic';
+    cpuTab.addEventListener('click', () => {
+      // 跳转到CPU页面
+      window.location.href = '../cpu/';
     });
-    
+	
 	indexTab.addEventListener('click', () => {
+      // 跳转
       window.location.href = '../';
     });
-	
+    
     // 格式化时间
     function formatTime(date) {
       const year = date.getFullYear();
@@ -232,7 +238,7 @@
         if (!response.ok) throw new Error('数据加载失败');
         
         const data = await response.json();
-        systemData = data.cpu_help || {};
+        systemData = data.ic_help || {};
         
         // 更新最后更新时间
         const now = new Date();
@@ -294,10 +300,10 @@
           <tr class="hover:bg-neutral/50 transition-all duration-300">
             <td class="py-4 px-6 font-medium text-lg">${name}</td>
             <td class="py-4 px-6 text-center">${getStatusIcon(config.analysis)}</td>
-            <td class="py-4 px-6 text-center">${getStatusIcon(config.xiugai)}</td>
-            <td class="py-4 px-6 text-center">${getStatusIcon(config.read)}</td>
-            <td class="py-4 px-6 text-center">${getStatusIcon(config.w_jiegou)}</td>
-            <td class="py-4 px-6 text-center">${getStatusIcon(config.w_shujv)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.date)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.newcard)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.xiaoqu)}</td>
+            <td class="py-4 px-6 text-center">${getStatusIcon(config.unit)}</td>
             <td class="py-4 px-6 text-center ${config.price ? 'text-primary font-medium' : 'text-gray-500'}">${priceDisplay}</td>
           </tr>
         `;
